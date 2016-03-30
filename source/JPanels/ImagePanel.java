@@ -9,11 +9,20 @@ import javax.imageio.ImageIO;
 
 public class ImagePanel extends JPanel {
 
-	private BufferedImage image;
+	private Icon icon;
 
 	public ImagePanel() {
 
-		Icon icon = new ImageIcon(getClass().getResource("jarvafaltet.png"));
+		try {
+			
+			icon = new ImageIcon(getClass().getResource("jarvafaltet.png"));
+		
+		} catch (NullPointerException e) {
+
+			System.out.println("Map not found.");
+
+		} 
+
 		JLabel iconLabel = new JLabel(icon);
 
 		JScrollPane imageScrollPane = new JScrollPane(iconLabel);

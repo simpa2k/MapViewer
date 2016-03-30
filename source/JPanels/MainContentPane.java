@@ -9,9 +9,10 @@ public class MainContentPane extends JPanel {
 
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
-		//add(new MenuBar());
-		ImagePanel imagePanel = new ImagePanel();
+		MenuBar menuBar = new MenuBar();
+		add(menuBar);
 
+		ImagePanel imagePanel = new ImagePanel();
 		add(imagePanel);
 
 	}
