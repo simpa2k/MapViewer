@@ -25,11 +25,7 @@ public class ImagePanel extends JPanel {
 
 		JLabel iconLabel = new JLabel(icon);
 
-		JScrollPane imageScrollPane = new JScrollPane(iconLabel);
-		imageScrollPane.setAlignmentX(LEFT_ALIGNMENT);
-		imageScrollPane.setPreferredSize(new Dimension(500, 600));
-
-		add(imageScrollPane);
+		add(iconLabel);
 
 	}
 

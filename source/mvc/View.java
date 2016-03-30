@@ -1,12 +1,15 @@
 package mvc;
 
-import JPanels.MainContentPane;
+import JPanels.*;
 import javax.swing.*;
+import java.awt.BorderLayout;
 
 public class View extends JFrame {
 
 	private Model model;
 	private Controller controller;
+
+	private Icon icon;
 
 	public View() {
 
@@ -17,13 +20,20 @@ public class View extends JFrame {
 		controller = new Controller(model);
 		this.controller = controller;
 
-		setContentPane(new MainContentPane());
+		MenuAndOptions menuAndOptions = new MenuAndOptions();
+		add(menuAndOptions, BorderLayout.NORTH);
+
+		ImagePanel imagePanel = new ImagePanel();
+		JScrollPane imageScrollPane = new JScrollPane(imagePanel);
+		add(imageScrollPane, BorderLayout.CENTER);
+
+		Categories categories = new Categories();
+		add(categories, BorderLayout.EAST);
 
 		setName("Inlupp2");
-		setSize(1000, 850);
+		setSize(800, 800);
+		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-		//pack();
 
 	}
 
