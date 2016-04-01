@@ -13,7 +13,7 @@ public class ImagePanel extends JPanel {
 
 	public ImagePanel() {
 
-		try {
+		/*try {
 			
 			icon = new ImageIcon(getClass().getResource("jarvafaltet.png"));
 		
@@ -25,7 +25,31 @@ public class ImagePanel extends JPanel {
 
 		JLabel iconLabel = new JLabel(icon);
 
+		add(iconLabel);*/
+
+	}
+
+	public void setMap(File mapFile) {
+
+		try {
+			
+			Image image = ImageIO.read(mapFile);
+			icon = new ImageIcon(image);
+
+		} catch(IOException e) {
+
+			System.out.println("Map not found.");
+
+		}
+
+		JLabel iconLabel = new JLabel(icon);
 		add(iconLabel);
+
+	}
+
+	public void setPlaces(File placesFile) {
+
+		System.out.println("Places");
 
 	}
 

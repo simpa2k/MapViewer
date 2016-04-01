@@ -1,11 +1,17 @@
 package JPanels;
 
+import mvc.*;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class MenuAndOptions extends JPanel {
 
-	public MenuAndOptions() {
+	Controller controller;
+
+	public MenuAndOptions(Controller controller) {
+
+		this.controller = controller;
 
 		setLayout(new GridLayout(0, 1));
 
@@ -15,7 +21,11 @@ public class MenuAndOptions extends JPanel {
 		menuBar.add(archive);
 
 		JMenuItem newMap = new JMenuItem("New Map");
+		newMap.addActionListener(event -> controller.openMap(this));
+
 		JMenuItem loadPlaces = new JMenuItem("Load Places");
+		loadPlaces.addActionListener(event -> controller.openPlaces(this));
+
 		JMenuItem save = new JMenuItem("Save");
 		JMenuItem exit = new JMenuItem("Exit");
 

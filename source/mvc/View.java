@@ -3,13 +3,14 @@ package mvc;
 import JPanels.*;
 import javax.swing.*;
 import java.awt.BorderLayout;
+import java.io.*;
 
 public class View extends JFrame {
 
 	private Model model;
 	private Controller controller;
 
-	private Icon icon;
+	private ImagePanel imagePanel;
 
 	public View() {
 
@@ -20,14 +21,10 @@ public class View extends JFrame {
 		controller = new Controller(model);
 		this.controller = controller;
 
-		MenuAndOptions menuAndOptions = new MenuAndOptions();
+		MenuAndOptions menuAndOptions = new MenuAndOptions(controller);
 		add(menuAndOptions, BorderLayout.NORTH);
 
-		ImagePanel imagePanel = new ImagePanel();
-		JScrollPane imageScrollPane = new JScrollPane(imagePanel);
-		add(imageScrollPane, BorderLayout.CENTER);
-
-		Categories categories = new Categories();
+		Categories categories = new Categories(controller);
 		add(categories, BorderLayout.EAST);
 
 		setName("Inlupp2");
@@ -37,9 +34,37 @@ public class View extends JFrame {
 
 	}
 
-	public void update() {
+	private void instantiateImagePanel() {
 
+		imagePanel = new ImagePanel();
+		JScrollPane imageScrollPane = new JScrollPane(imagePanel);
+		add(imageScrollPane, BorderLayout.CENTER);
 
+	}
+
+	public void updateMap() {
+
+		if(imagePanel == null) {
+
+			instantiateImagePanel();
+
+		}
+
+		imagePanel.setMap(model.getMapFile());
+		revalidate();
+
+	}
+
+	public void updatePlaces() {
+
+		if(imagePanel == null) {
+
+			instantiateImagePanel();
+
+		}
+
+		imagePanel.setPlaces(model.getPlacesFile());
+		revalidate();
 
 	}
 
