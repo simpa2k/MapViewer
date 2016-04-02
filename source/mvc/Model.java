@@ -97,13 +97,19 @@ public class Model {
 
 		}
 
-		//view.updatePlaces();
+		view.updatePlaces();
 
 	}
 
 	public File getPlacesFile() {
 
 		return placesFile;
+
+	}
+
+	public HashMap<Position, Place> getPlaces() {
+
+		return places;
 
 	}
 

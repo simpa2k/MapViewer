@@ -1,7 +1,7 @@
 package places;
 
 import javax.swing.JComponent;
-import java.awt.Color;
+import java.awt.*;
 
 public abstract class Place extends JComponent {
 
@@ -32,6 +32,12 @@ public abstract class Place extends JComponent {
 
 	}
 
+	public Color getColor() {
+
+		return resolveColor();
+
+	}
+
 	public String getCategory() {
 
 		return category;
@@ -41,6 +47,43 @@ public abstract class Place extends JComponent {
 	public Position getPosition() {
 
 		return position;
+
+	}
+
+	@Override
+	protected void paintComponent(Graphics g) {
+
+		super.paintComponent(g);
+		g.setColor(resolveColor());
+
+		int[] xPoints = {10, 0, 20};
+		int[] yPoints = {20, 0, 0};
+		int nPoints = 3;
+
+		g.fillPolygon(xPoints, yPoints, nPoints);
+
+		//g.fillRect(0, 0, 20, 20);
+
+	}
+
+	@Override
+	public Dimension getMinimumSize() {
+
+		return new Dimension(200, 200);
+
+	}
+
+	@Override
+	public Dimension getMaximumSize() {
+
+		return new Dimension(200, 200);
+
+	}
+
+	@Override
+	public Dimension getPreferredSize() {
+
+		return new Dimension(200, 200);
 
 	}
 

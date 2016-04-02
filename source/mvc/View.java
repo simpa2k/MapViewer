@@ -52,6 +52,7 @@ public class View extends JFrame {
 
 		imagePanel.setMap(model.getMapFile());
 		revalidate();
+		repaint();
 
 	}
 
@@ -63,8 +64,9 @@ public class View extends JFrame {
 
 		}
 
-		imagePanel.setPlaces(model.getPlacesFile());
+		imagePanel.drawPlaces(model.getPlaces());
 		revalidate();
+		repaint();
 
 	}
 
