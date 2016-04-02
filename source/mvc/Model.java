@@ -121,13 +121,11 @@ public class Model {
 
 	public void setCategoryToVisible(String category, boolean trueOrFalse) {
 
-		//places.forEach( place -> if(place.getCategory == category) {place.setVisible(trueOrFalse)} );
+		places.forEach( (position, place) -> {
 		
-		places.forEach((position, place) -> {
-
 			if(place.getCategory().equals(category)) {
 
-				System.out.println(place.getName() + " " + place.getCategory());
+				place.setVisible(trueOrFalse);
 
 			}
 

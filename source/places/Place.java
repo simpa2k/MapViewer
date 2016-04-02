@@ -62,8 +62,6 @@ public abstract class Place extends JComponent {
 
 		g.fillPolygon(xPoints, yPoints, nPoints);
 
-		//g.fillRect(0, 0, 20, 20);
-
 	}
 
 	@Override
