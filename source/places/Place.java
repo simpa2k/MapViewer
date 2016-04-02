@@ -64,25 +64,4 @@ public abstract class Place extends JComponent {
 
 	}
 
-	@Override
-	public Dimension getMinimumSize() {
-
-		return new Dimension(200, 200);
-
-	}
-
-	@Override
-	public Dimension getMaximumSize() {
-
-		return new Dimension(200, 200);
-
-	}
-
-	@Override
-	public Dimension getPreferredSize() {
-
-		return new Dimension(200, 200);
-
-	}
-
 }
