@@ -124,4 +124,23 @@ public class Controller {
 
 	}
 
+	public void removeMarkedPlaces() {
+
+		model.getPlaces().forEach( (position, place) -> {
+
+			if(place.getMarked()) {
+
+				view.getImagePanel().remove(place);
+
+			}
+
+		});
+
+		model.removeMarkedPlaces();
+
+		view.revalidate();
+		view.repaint();
+
+	}
+
 }

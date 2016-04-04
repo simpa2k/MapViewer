@@ -59,6 +59,7 @@ public class MenuAndOptions extends JPanel {
 		optionBar.add(hideButton);
 
 		JButton removeButton = new JButton("Remove");
+		removeButton.addActionListener(event -> controller.removeMarkedPlaces());
 		optionBar.add(removeButton);
 
 		JButton whatIsHereButton = new JButton("What is here?");

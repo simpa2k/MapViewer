@@ -142,6 +142,27 @@ public class Model {
 
 	}
 
+	public void removeMarkedPlaces() {
+
+		for(Place place : places.values()) {
+
+			if(place.getMarked()) {
+
+				placesByName.remove(place.getName(), place);
+
+			}
+
+		}
+
+		places.entrySet().removeIf(e -> e.getValue().getMarked());
+		placesByName.removeIf(place -> {
+		
+			return ((Place)place).getMarked();
+
+		});
+
+	}
+
 	public void setCategoryToVisible(String category, boolean trueOrFalse) {
 
 		places.forEach( (position, place) -> {
