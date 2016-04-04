@@ -98,6 +98,7 @@ public class Controller {
 
 	}
 
+	//Borde inte det här ske i ExistingPlaceController?
 	public void search(String query) {
 
 		for(Place place : model.getPlacesByName(query)) {
@@ -106,6 +107,20 @@ public class Controller {
 			place.setMarked(true);
 
 		}
+
+	}
+
+	public void hideSelectedPlaces() {
+
+		model.getPlaces().forEach( (position, place) -> {
+
+			if(place.getMarked()) {
+
+				place.setVisible(false);
+
+			}
+
+		});
 
 	}
 

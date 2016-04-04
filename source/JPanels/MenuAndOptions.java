@@ -55,6 +55,7 @@ public class MenuAndOptions extends JPanel {
 		optionBar.add(searchButton);
 
 		JButton hideButton = new JButton("Hide");
+		hideButton.addActionListener(event -> controller.hideSelectedPlaces());
 		optionBar.add(hideButton);
 
 		JButton removeButton = new JButton("Remove");
