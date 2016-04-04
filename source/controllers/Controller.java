@@ -98,4 +98,15 @@ public class Controller {
 
 	}
 
+	public void search(String query) {
+
+		for(Place place : model.getPlacesByName(query)) {
+
+			place.setVisible(true);
+			place.setMarked(true);
+
+		}
+
+	}
+
 }

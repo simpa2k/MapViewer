@@ -61,6 +61,12 @@ public abstract class Place extends JComponent {
 
 	}
 
+	public void setMarked(boolean markedOrNot) {
+
+		marked = markedOrNot;
+
+	}
+
 	public boolean getMarked() {
 
 		return marked;

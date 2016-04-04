@@ -14,6 +14,7 @@ public class Model {
 	private File placesFile;
 
 	private HashMap<Position, Place> places = new HashMap<>();
+	private MultiMap<String, Place> placesByName = new MultiMap<>();
 
 	public void setView(View view) {
 
@@ -45,6 +46,7 @@ public class Model {
 
 			namedPlace.addMouseListener(new ExistingPlaceController(namedPlace));
 			places.put(namedPlace.getPosition(), namedPlace);
+			placesByName.put(namedPlace.getName(), namedPlace);
 
 		} else {
 
@@ -55,6 +57,7 @@ public class Model {
 
 			describedPlace.addMouseListener(new ExistingPlaceController(describedPlace));
 			places.put(describedPlace.getPosition(), describedPlace);
+			placesByName.put(describedPlace.getName(), describedPlace);
 			
 		}
 
@@ -124,6 +127,12 @@ public class Model {
 	public Place getPlace(Position position) {
 
 		return places.get(position);
+
+	}
+
+	public ArrayList<Place> getPlacesByName(String name) {
+
+		return placesByName.get(name);
 
 	}
 

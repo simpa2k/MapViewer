@@ -51,6 +51,7 @@ public class MenuAndOptions extends JPanel {
 		optionBar.add(searchField);
 
 		JButton searchButton = new JButton("Search");
+		searchButton.addActionListener(event -> controller.search(searchField.getText()));
 		optionBar.add(searchButton);
 
 		JButton hideButton = new JButton("Hide");
