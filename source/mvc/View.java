@@ -1,5 +1,8 @@
 package mvc;
 
+import controllers.Controller;
+import places.*;
+
 import JPanels.*;
 import javax.swing.*;
 import java.awt.BorderLayout;
@@ -11,6 +14,7 @@ public class View extends JFrame {
 	private Controller controller;
 
 	private ImagePanel imagePanel;
+	private Categories categories;
 
 	public View() {
 
@@ -18,13 +22,13 @@ public class View extends JFrame {
 		this.model = model;
 		model.setView(this);
 
-		controller = new Controller(model);
+		controller = new Controller(model, this);
 		this.controller = controller;
 
 		MenuAndOptions menuAndOptions = new MenuAndOptions(controller);
 		add(menuAndOptions, BorderLayout.NORTH);
 
-		Categories categories = new Categories(controller);
+		categories = new Categories(controller);
 		add(categories, BorderLayout.EAST);
 
 		setName("Inlupp2");
@@ -39,6 +43,12 @@ public class View extends JFrame {
 		imagePanel = new ImagePanel();
 		JScrollPane imageScrollPane = new JScrollPane(imagePanel);
 		add(imageScrollPane, BorderLayout.CENTER);
+
+	}
+
+	public ImagePanel getImagePanel() {
+
+		return imagePanel;
 
 	}
 
@@ -67,6 +77,18 @@ public class View extends JFrame {
 		imagePanel.drawPlaces(model.getPlaces());
 		revalidate();
 		repaint();
+
+	}
+
+	public void drawPlace(Position position) {
+
+		imagePanel.drawPlace(model.getPlace(position));
+
+	}
+
+	public String getSelectedCategory() {
+
+		return categories.getSelectedCategory();
 
 	}
 

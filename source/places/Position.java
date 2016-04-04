@@ -24,4 +24,25 @@ public class Position {
 
 	}
 
+	@Override
+	public boolean equals(Object other) {
+
+		if(other instanceof Position) {
+			
+			Position position = (Position) other;
+
+			return (position.getX() == x) && (position.getY() == y);
+
+		}
+		return false;
+
+	}
+
+	@Override
+	public int hashCode() {
+
+		return x + y * (Integer.MAX_VALUE + 1); //multiplicera med ett värde som är 1 större än det största möjliga värdet för y
+
+	}
+
 }

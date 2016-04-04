@@ -1,6 +1,7 @@
 package mvc;
 
 import places.*;
+import controllers.ExistingPlaceController;
 
 import java.io.*;
 import java.util.*;
@@ -34,39 +35,46 @@ public class Model {
 
 	}
 
-	private void instantiatePlace(String[] properties) {
+	public void createPlace(String category, int xPosition, int yPosition, String name, String description) {
+
+		if(description == null) {
+			
+			NamedPlace namedPlace = new NamedPlace(category, 
+												   new Position(xPosition, yPosition), 
+												   name);
+
+			namedPlace.addMouseListener(new ExistingPlaceController(namedPlace));
+			places.put(namedPlace.getPosition(), namedPlace);
+
+		} else {
+
+			DescribedPlace describedPlace = new DescribedPlace(category, 
+															   new Position(xPosition, yPosition), 
+															   name,
+															   description);
+
+			describedPlace.addMouseListener(new ExistingPlaceController(describedPlace));
+			places.put(describedPlace.getPosition(), describedPlace);
+			
+		}
+
+	}
+
+	private void parsePlaceLine(String[] properties) {
 
 		try {
 
-			String namedOrDescribed = properties[0];
+			String type = properties[0];
 			String category = properties[1];
+			//Position position = new Position(Integer.parseInt(properties[2]), Integer.parseInt(properties[3]));
 			int xPosition = Integer.parseInt(properties[2]);
 			int yPosition = Integer.parseInt(properties[3]);
 			String name = properties[4];
+			String description = properties.length == 6 ? properties[6] : null;
 
-			switch(namedOrDescribed) {
+			createPlace(category, xPosition, yPosition, name, description);
 
-				case "Named":
-					NamedPlace namedPlace = new NamedPlace(category, 
-														   new Position(xPosition, yPosition), 
-														   name);
-
-					places.put(namedPlace.getPosition(), namedPlace);
-					break;
-				case "Described":
-
-					String description = properties[5];
-
-					DescribedPlace describedPlace = new DescribedPlace(category, 
-																	   new Position(xPosition, yPosition), 
-																	   name,
-																	   description);
-
-					places.put(describedPlace.getPosition(), describedPlace);
-					break;
-			}
-
-		} catch(IndexOutOfBoundsException e) {
+		} catch(ArrayIndexOutOfBoundsException e) {
 
 			return;
 
@@ -86,8 +94,8 @@ public class Model {
 
 				String line = scanner.nextLine();
 				String[] properties = line.split(",");
-
-				instantiatePlace(properties);
+				
+				parsePlaceLine(properties);
 					
 			}
 
@@ -110,6 +118,12 @@ public class Model {
 	public HashMap<Position, Place> getPlaces() {
 
 		return places;
+
+	}
+
+	public Place getPlace(Position position) {
+
+		return places.get(position);
 
 	}
 

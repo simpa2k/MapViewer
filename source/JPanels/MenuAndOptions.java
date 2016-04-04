@@ -1,6 +1,7 @@
 package JPanels;
 
 import mvc.*;
+import controllers.Controller;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,10 +22,10 @@ public class MenuAndOptions extends JPanel {
 		menuBar.add(archive);
 
 		JMenuItem newMap = new JMenuItem("New Map");
-		newMap.addActionListener(event -> controller.openMap(this));
+		newMap.addActionListener(event -> controller.openMap());
 
 		JMenuItem loadPlaces = new JMenuItem("Load Places");
-		loadPlaces.addActionListener(event -> controller.openPlaces(this));
+		loadPlaces.addActionListener(event -> controller.openPlaces());
 
 		JMenuItem save = new JMenuItem("Save");
 		JMenuItem exit = new JMenuItem("Exit");
@@ -43,6 +44,7 @@ public class MenuAndOptions extends JPanel {
 
 		String[] typesOfPlaces = {"Named", "Described"};
 		JComboBox namedOrDescribed = new JComboBox(typesOfPlaces);
+		namedOrDescribed.addActionListener(event -> controller.addMapListener(typesOfPlaces[namedOrDescribed.getSelectedIndex()]));
 		optionBar.add(namedOrDescribed);
 
 		JTextField searchField = new JTextField("Search", 10);

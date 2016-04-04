@@ -47,10 +47,15 @@ public class ImagePanel extends JLayeredPane {
 
 		places.forEach( (position, place) -> {
 
-			place.setBounds(position.getX(), position.getY(), 20, 20);
-			add(place, new Integer(2));
+			drawPlace(place);
 
 		});
+
+	}
+
+	public void drawPlace(Place place) {
+
+		add(place, new Integer(2));
 
 	}
 

@@ -1,17 +1,22 @@
 package places;
 
-import javax.swing.JComponent;
+import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 
 public abstract class Place extends JComponent {
 
 	private String category;
 	private Position position;
+	private boolean marked = false;
+	private boolean foldedOut = false;
 
 	public Place(String category, Position position) {
 
 		this.category = category;
 		this.position = position;
+
+		setBounds(position.getX() - 10, position.getY() - 20, 20, 20);
 
 	}
 
@@ -50,6 +55,44 @@ public abstract class Place extends JComponent {
 
 	}
 
+	public void setMarked() {
+
+		marked = !marked;
+
+	}
+
+	public boolean getMarked() {
+
+		return marked;
+
+	}
+
+	public void setFolded() {
+
+		foldedOut = !foldedOut;
+
+	}
+
+	public boolean getFolded() {
+
+		return foldedOut;
+
+	}
+
+	/*protected void setWidth(int width) {
+
+		this.width = width;
+
+	}*/
+
+	/*protected void setHeight(int height) {
+
+		this.height = height;
+
+	}*/
+
+	protected abstract void displayAdditionalInfo(Graphics g);
+
 	@Override
 	protected void paintComponent(Graphics g) {
 
@@ -61,6 +104,19 @@ public abstract class Place extends JComponent {
 		int nPoints = 3;
 
 		g.fillPolygon(xPoints, yPoints, nPoints);
+
+		if(marked) {
+
+			g.setColor(Color.RED);
+			g.drawRect(0, 0, 20, 20);
+
+		}
+
+		if(foldedOut) {
+			
+			displayAdditionalInfo(g);
+
+		}
 
 	}
 

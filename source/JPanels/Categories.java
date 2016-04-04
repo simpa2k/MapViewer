@@ -1,6 +1,7 @@
 package JPanels;
 
 import mvc.*;
+import controllers.Controller;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,9 +9,10 @@ import java.awt.event.*;
 
 public class Categories extends JPanel {
 
-	Controller controller;
+	private Controller controller;
 
-	JList categoryList; 
+	String[] categories = {"Buss", "Tunnelbana", "Tåg"};
+	private JList categoryList; 
 
 	public Categories(Controller controller) {
 
@@ -24,7 +26,6 @@ public class Categories extends JPanel {
 		JLabel heading = new JLabel("Categories");
 		centerPanel.add(heading, BorderLayout.NORTH);
 
-		String[] categories = {"Buss", "Tunnelbana", "Tåg"};
 		categoryList = new JList(categories);
 		categoryList.addListSelectionListener(event -> 
 											  controller.showCategory(event, categories[categoryList.getSelectedIndex()]));
@@ -39,6 +40,12 @@ public class Categories extends JPanel {
 		c.gridy = 1;
 
 		add(centerPanel, c);
+
+	}
+
+	public String getSelectedCategory() {
+
+		return categories[categoryList.getSelectedIndex()];
 
 	}
 
