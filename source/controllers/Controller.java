@@ -17,6 +17,9 @@ public class Controller {
 
 	private final JFileChooser fileChooser = new JFileChooser();
 
+	private NewPlaceController newPlaceController;
+	private WhatIsHereController whatIsHereController;
+
 	public Controller(Model model, View view) {
 
 		this.model = model;
@@ -67,14 +70,27 @@ public class Controller {
 		ImagePanel mapPanel = view.getImagePanel();
 
 		mapPanel.setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
-		mapPanel.addMouseListener(new NewPlaceController(this, mapPanel, selectedType));
+
+		newPlaceController = new NewPlaceController(this, mapPanel, selectedType);
+
+		mapPanel.addMouseListener(newPlaceController);
 
 	}
 
 	public void addWhatIsHereController() {
 
 		ImagePanel mapPanel = view.getImagePanel();
-		mapPanel.addMouseListener(new WhatIsHereController(model));
+
+		whatIsHereController = new WhatIsHereController(model, this);
+
+		mapPanel.addMouseListener(whatIsHereController);
+
+	}
+
+	public void removeWhatIsHereController() {
+
+		ImagePanel mapPanel = view.getImagePanel();
+		mapPanel.removeMouseListener(whatIsHereController);
 
 	}
 
@@ -87,6 +103,10 @@ public class Controller {
 
 		//Det här är inte världens snyggate lösning
 		view.drawPlace(new Position(xPosition, yPosition));
+
+		ImagePanel mapPanel = view.getImagePanel();
+		mapPanel.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+		mapPanel.removeMouseListener(newPlaceController);
 
 	}
 

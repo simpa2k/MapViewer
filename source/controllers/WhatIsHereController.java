@@ -8,10 +8,12 @@ import java.awt.event.*;
 public class WhatIsHereController implements MouseListener {
 
 	Model model;
+	Controller parentController;
 
-	public WhatIsHereController(Model model) {
+	public WhatIsHereController(Model model, Controller parentController) {
 
 		this.model = model;
+		this.parentController = parentController;
 
 	}
 
@@ -19,7 +21,7 @@ public class WhatIsHereController implements MouseListener {
 	public void mouseClicked(MouseEvent e) {
 
 		Position clickedPosition = new Position(e.getX(), e.getY());
-
+		System.out.println("x: " + e.getX()  + " y: " + e.getY());
 		Place place = model.searchAreaAroundPosition(clickedPosition);
 
 		if(place != null) {
@@ -29,6 +31,8 @@ public class WhatIsHereController implements MouseListener {
 			place.repaint();
 
 		}
+
+		parentController.removeWhatIsHereController();
 	}
 
 	@Override
