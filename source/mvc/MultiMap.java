@@ -6,6 +6,7 @@ import java.util.function.*;
 
 public class MultiMap<K, V> {
 
+	//Ska man inte undvika dubbletter här?
 	HashMap<K, ArrayList<V>> map;
 
 	public MultiMap() {
@@ -44,25 +45,19 @@ public class MultiMap<K, V> {
 
 	}*/
 
-	public void removeIf(Predicate predicate) {
+	public void removeIf(Predicate<V> predicate) {
 
 		Iterator<K> mapIterator = map.keySet().iterator();
 
 		while(mapIterator.hasNext()) {
 
 			ArrayList<V> values = map.get(mapIterator.next());
-			
 			Iterator<V> listIterator = values.iterator();
 
 			while(listIterator.hasNext()) {
 
 				V nextItem = listIterator.next();
 
-				/*if(remover.remove(nextItem)) {
-
-					listIterator.remove();
-
-				}*/
 				if(predicate.test(nextItem)) {
 
 					listIterator.remove();
@@ -77,13 +72,6 @@ public class MultiMap<K, V> {
 	public boolean isEmpty() {
 
 		return map.isEmpty();
-
-	}
-
-	@FunctionalInterface
-	interface Remover<K> {
-
-		public boolean remove(K key);
 
 	}
 
