@@ -102,9 +102,11 @@ public class Controller {
 	public void search(String query) {
 
 		for(Place place : model.getPlacesByName(query)) {
-
+			System.out.println(place);
 			place.setVisible(true);
 			place.setMarked(true);
+
+			view.repaint();
 
 		}
 

@@ -144,7 +144,7 @@ public class Model {
 
 	public void removeMarkedPlaces() {
 
-		for(Place place : places.values()) {
+		/*for(Place place : places.values()) {
 
 			if(place.getMarked()) {
 
@@ -152,7 +152,7 @@ public class Model {
 
 			}
 
-		}
+		}*/
 
 		places.entrySet().removeIf(e -> e.getValue().getMarked());
 		placesByName.removeIf(place -> {

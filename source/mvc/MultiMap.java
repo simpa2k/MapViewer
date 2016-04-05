@@ -35,13 +35,13 @@ public class MultiMap<K, V> {
 
 	}
 
-	public void remove(K key, V value) {
+	/*public void remove(K key, V value) {
 
 		ArrayList<V> values = map.get(key);
 
 		values.remove(value);
 
-	}
+	}*/
 
 	public void removeIf(Remover remover) {
 
@@ -65,6 +65,12 @@ public class MultiMap<K, V> {
 
 			}
 		}
+
+	}
+
+	public boolean isEmpty() {
+
+		return map.isEmpty();
 
 	}
 
