@@ -61,12 +61,20 @@ public class Controller {
 
 	}
 
+	//Se över namngivningen här - båda de två nedanstående lägger till lyssnare på kartan
 	public void addMapListener(String selectedType) {
 
 		ImagePanel mapPanel = view.getImagePanel();
 
 		mapPanel.setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
 		mapPanel.addMouseListener(new NewPlaceController(this, mapPanel, selectedType));
+
+	}
+
+	public void addWhatIsHereController() {
+
+		ImagePanel mapPanel = view.getImagePanel();
+		mapPanel.addMouseListener(new WhatIsHereController(model));
 
 	}
 
@@ -102,7 +110,7 @@ public class Controller {
 	public void search(String query) {
 
 		for(Place place : model.getPlacesByName(query)) {
-			System.out.println(place);
+			
 			place.setVisible(true);
 			place.setMarked(true);
 

@@ -69,7 +69,6 @@ public class Model {
 
 			String type = properties[0];
 			String category = properties[1];
-			//Position position = new Position(Integer.parseInt(properties[2]), Integer.parseInt(properties[3]));
 			int xPosition = Integer.parseInt(properties[2]);
 			int yPosition = Integer.parseInt(properties[3]);
 			String name = properties[4];
@@ -127,6 +126,30 @@ public class Model {
 	public Place getPlace(Position position) {
 
 		return places.get(position);
+
+	}
+
+	public Place searchAreaAroundPosition(Position positionToCheck) {
+
+		for(Map.Entry<Position, Place> entry : places.entrySet()) {
+
+			Position position = entry.getKey();
+			Place place = entry.getValue();
+
+			boolean isSufficientlyCloseX = ( positionToCheck.getX() >= (position.getX() - 10) ) && 
+										   ( positionToCheck.getX() <= (position.getX() + 10) );
+
+			boolean isSufficientlyCloseY = ( positionToCheck.getY() >= (position.getX() - 10) ) && 
+										   ( positionToCheck.getY() <= (position.getY() + 10) );
+
+			if(isSufficientlyCloseX && isSufficientlyCloseY) {
+
+				return place;
+
+			}
+
+		}
+		return null;
 
 	}
 

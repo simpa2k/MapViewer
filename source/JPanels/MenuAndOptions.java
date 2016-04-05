@@ -63,6 +63,7 @@ public class MenuAndOptions extends JPanel {
 		optionBar.add(removeButton);
 
 		JButton whatIsHereButton = new JButton("What is here?");
+		whatIsHereButton.addActionListener(event -> controller.addWhatIsHereController());
 		optionBar.add(whatIsHereButton);
 
 		add(optionBar);
