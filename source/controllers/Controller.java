@@ -9,6 +9,7 @@ import javax.swing.event.*;
 import java.io.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 public class Controller {
 
@@ -69,11 +70,13 @@ public class Controller {
 
 		ImagePanel mapPanel = view.getImagePanel();
 
-		mapPanel.setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
+		if(mapPanel != null) {
 
-		newPlaceController = new NewPlaceController(this, mapPanel, selectedType);
+			mapPanel.setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
+			newPlaceController = new NewPlaceController(this, mapPanel, selectedType);
 
-		mapPanel.addMouseListener(newPlaceController);
+			mapPanel.addMouseListener(newPlaceController);
+		}
 
 	}
 
@@ -81,32 +84,45 @@ public class Controller {
 
 		ImagePanel mapPanel = view.getImagePanel();
 
-		whatIsHereController = new WhatIsHereController(model, this);
+		if(mapPanel != null) {
 
-		mapPanel.addMouseListener(whatIsHereController);
+			whatIsHereController = new WhatIsHereController(model, this);
+			mapPanel.addMouseListener(whatIsHereController);
+
+		}
 
 	}
 
 	public void removeWhatIsHereController() {
 
 		ImagePanel mapPanel = view.getImagePanel();
-		mapPanel.removeMouseListener(whatIsHereController);
+
+		if(mapPanel != null) {
+
+			mapPanel.removeMouseListener(whatIsHereController);
+
+		}
 
 	}
 
 	protected void createPlace(int xPosition, int yPosition, String name, String description) {
 
-		String type = description == null ? "Named" : "Described";
-		String selectedCategory = view.getSelectedCategory();
-
-		model.createPlace(selectedCategory, xPosition, yPosition, name, description);
-
-		//Det här är inte världens snyggate lösning
-		view.drawPlace(new Position(xPosition, yPosition));
-
 		ImagePanel mapPanel = view.getImagePanel();
-		mapPanel.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-		mapPanel.removeMouseListener(newPlaceController);
+
+		if(mapPanel != null) {
+
+			String type = description == null ? "Named" : "Described";
+			String selectedCategory = view.getSelectedCategory();
+
+			model.createPlace(selectedCategory, xPosition, yPosition, name, description);
+
+			//Det här är inte världens snyggate lösning
+			view.drawPlace(new Position(xPosition, yPosition));
+
+			mapPanel.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+			mapPanel.removeMouseListener(newPlaceController);
+
+		}
 
 	}
 
@@ -129,12 +145,18 @@ public class Controller {
 	//Borde inte det här ske i ExistingPlaceController?
 	public void search(String query) {
 
-		for(Place place : model.getPlacesByName(query)) {
-			
-			place.setVisible(true);
-			place.setMarked(true);
+		ArrayList<Place> placesByName = model.getPlacesByName(query);
 
-			view.repaint();
+		if(placesByName != null) {
+
+			for(Place place : placesByName) {
+			
+				place.setVisible(true);
+				place.setMarked(true);
+
+				view.repaint();
+
+			}
 
 		}
 
