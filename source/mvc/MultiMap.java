@@ -2,6 +2,7 @@ package mvc;
 
 import places.*;
 import java.util.*;
+import java.util.function.*;
 
 public class MultiMap<K, V> {
 
@@ -43,7 +44,7 @@ public class MultiMap<K, V> {
 
 	}*/
 
-	public void removeIf(Remover remover) {
+	public void removeIf(Predicate predicate) {
 
 		Iterator<K> mapIterator = map.keySet().iterator();
 
@@ -57,7 +58,12 @@ public class MultiMap<K, V> {
 
 				V nextItem = listIterator.next();
 
-				if(remover.remove(nextItem)) {
+				/*if(remover.remove(nextItem)) {
+
+					listIterator.remove();
+
+				}*/
+				if(predicate.test(nextItem)) {
 
 					listIterator.remove();
 

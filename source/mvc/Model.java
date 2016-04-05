@@ -157,6 +157,7 @@ public class Model {
 		places.entrySet().removeIf(e -> e.getValue().getMarked());
 		placesByName.removeIf(place -> {
 		
+			//((Place)place).getMarked();
 			return ((Place)place).getMarked();
 
 		});
