@@ -139,7 +139,7 @@ public class Model {
 			boolean isSufficientlyCloseX = ( positionToCheck.getX() >= (position.getX() - 10) ) && 
 										   ( positionToCheck.getX() <= (position.getX() + 10) );
 
-			boolean isSufficientlyCloseY = ( positionToCheck.getY() >= (position.getX() - 10) ) && 
+			boolean isSufficientlyCloseY = ( positionToCheck.getY() >= (position.getY() - 10) ) && 
 										   ( positionToCheck.getY() <= (position.getY() + 10) );
 
 			if(isSufficientlyCloseX && isSufficientlyCloseY) {
