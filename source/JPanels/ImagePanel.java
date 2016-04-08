@@ -12,7 +12,6 @@ import javax.imageio.ImageIO;
 
 public class ImagePanel extends JLayeredPane {
 
-	private Icon icon;
 	private Image image;
 
 	public ImagePanel() {
@@ -26,7 +25,6 @@ public class ImagePanel extends JLayeredPane {
 		try {
 			
 			image = ImageIO.read(mapFile);
-			icon = new ImageIcon(image);
 
 		} catch(IOException e) {
 
@@ -34,10 +32,7 @@ public class ImagePanel extends JLayeredPane {
 
 		}
 
-		JLabel iconLabel = new JLabel(icon);
-		
 		this.setPreferredSize(new Dimension(image.getWidth(this), image.getHeight(this)));
-		iconLabel.setBounds(0, 0, image.getWidth(null), image.getHeight(null));
 		
 	}
 
