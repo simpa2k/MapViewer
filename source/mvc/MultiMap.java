@@ -62,6 +62,12 @@ public class MultiMap<K, V> {
 
 					listIterator.remove();
 
+					if(values.isEmpty()) {
+
+						mapIterator.remove();
+
+					}
+
 				}
 
 			}

@@ -6,7 +6,7 @@ import JPanels.ImagePanel;
 import javax.swing.*;
 import java.awt.event.*;
 
-public class ExistingPlaceController implements MouseListener {
+public class ExistingPlaceController extends MouseAdapter {
 
 	private Place model;
 
@@ -30,34 +30,6 @@ public class ExistingPlaceController implements MouseListener {
 			model.repaint();
 
 		}
-
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-
-
-
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-
-
-
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-
-
-
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-
-
 
 	}
 
