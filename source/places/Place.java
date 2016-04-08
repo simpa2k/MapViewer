@@ -85,18 +85,6 @@ public abstract class Place extends JComponent {
 
 	}
 
-	/*protected void setWidth(int width) {
-
-		this.width = width;
-
-	}*/
-
-	/*protected void setHeight(int height) {
-
-		this.height = height;
-
-	}*/
-
 	protected abstract void displayAdditionalInfo(Graphics g);
 
 	@Override
