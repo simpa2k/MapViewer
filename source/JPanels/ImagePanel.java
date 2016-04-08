@@ -36,10 +36,16 @@ public class ImagePanel extends JLayeredPane {
 
 		JLabel iconLabel = new JLabel(icon);
 		
-		this.setPreferredSize(new Dimension(image.getWidth(null), image.getHeight(null)));
+		this.setPreferredSize(new Dimension(image.getWidth(this), image.getHeight(this)));
 		iconLabel.setBounds(0, 0, image.getWidth(null), image.getHeight(null));
 		
-		add(iconLabel, new Integer(1));
+	}
+
+	protected void paintComponent(Graphics g) {
+
+		super.paintComponent(g);
+
+		g.drawImage(image, 0, 0, image.getWidth(this), image.getHeight(this), this);
 
 	}
 

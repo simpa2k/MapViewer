@@ -16,7 +16,7 @@ public class Controller {
 	private Model model;
 	private View view;
 
-	private final JFileChooser fileChooser = new JFileChooser();
+	private final JFileChooser fileChooser = new JFileChooser("../");
 
 	private NewPlaceController newPlaceController;
 	private WhatIsHereController whatIsHereController;
