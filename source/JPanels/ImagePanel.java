@@ -10,7 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
-public class ImagePanel extends JLayeredPane {
+public class ImagePanel extends JPanel {
 
 	private Image image;
 	
@@ -48,7 +48,7 @@ public class ImagePanel extends JLayeredPane {
 
 		places.forEach( (position, place) -> {
 
-			drawPlace(place);
+			add(place);
 
 		});
 
@@ -56,7 +56,7 @@ public class ImagePanel extends JLayeredPane {
 
 	public void drawPlace(Place place) {
 
-		add(place, new Integer(2));
+		add(place); 
 
 	}
 
