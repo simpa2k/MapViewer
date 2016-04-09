@@ -32,10 +32,10 @@ public class View extends JFrame {
 		add(categories, BorderLayout.EAST);
 
 		setName("Inlupp2");
-		setSize(800, 800);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
+		pack();
 	}
 
 	private void instantiateImagePanel() {
@@ -61,7 +61,8 @@ public class View extends JFrame {
 		}
 
 		imagePanel.setMap(model.getMapFile());
-		revalidate();
+
+		pack();
 		repaint();
 
 	}
@@ -70,12 +71,14 @@ public class View extends JFrame {
 
 		if(imagePanel == null) {
 
-			instantiateImagePanel();
+			//instantiateImagePanel();
+			JOptionPane.showMessageDialog(this, "No map chosen", "No map", JOptionPane.ERROR_MESSAGE);
+			return;
 
 		}
 
 		imagePanel.drawPlaces(model.getPlaces());
-		revalidate();
+
 		repaint();
 
 	}

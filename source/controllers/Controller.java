@@ -42,7 +42,7 @@ public class Controller {
 	}
 
 	public void openMap() {
-
+		
 		File mapFile = openFileDialog();
 
 		if(mapFile != null) {
@@ -54,6 +54,12 @@ public class Controller {
 	}
 
 	public void openPlaces() {
+
+		if(view.getImagePanel() == null) {
+
+			JOptionPane.showMessageDialog(view, "No map chosen", "No map", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
 
 		File placesFile = openFileDialog();
 

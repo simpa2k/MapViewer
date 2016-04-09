@@ -13,7 +13,7 @@ import javax.imageio.ImageIO;
 public class ImagePanel extends JLayeredPane {
 
 	private Image image;
-
+	
 	public ImagePanel() {
 
 		setLayout(null);
