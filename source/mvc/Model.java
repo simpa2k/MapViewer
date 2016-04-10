@@ -4,6 +4,9 @@ import places.*;
 import controllers.ExistingPlaceController;
 
 import java.io.*;
+import java.nio.*;
+import java.nio.file.*;
+import java.nio.charset.Charset;
 import java.util.*;
 
 public class Model {
@@ -109,6 +112,28 @@ public class Model {
 
 		view.updatePlaces();
 
+	}
+
+	public void savePlaces(Path pathToSaveFile) {
+		
+		if(places != null) {
+			
+			Charset charset = Charset.forName("UTF-8");
+			
+			places.forEach( (position, place) -> {		
+				
+				try(BufferedWriter writer = Files.newBufferedWriter(pathToSaveFile, charset, StandardOpenOption.APPEND)) {
+
+					writer.write(place.toString(), 0, place.toString().length());
+					writer.newLine();
+
+				} catch(IOException e) {
+					
+					System.out.println(e);
+
+				}	
+			});
+		}
 	}
 
 	public File getPlacesFile() {

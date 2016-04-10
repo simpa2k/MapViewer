@@ -1,6 +1,7 @@
 package places;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class DescribedPlace extends NamedPlace {
 
@@ -16,11 +17,17 @@ public class DescribedPlace extends NamedPlace {
 		this.description = description;
 
 	}
+	
+	public String getDescription() {
+
+		return description;
+
+	}
 
 	@Override
-	protected void displayAdditionalInfo(Graphics g) {
+	protected void paintAdditionalInfo(Graphics g) {
 
-		super.displayAdditionalInfo(g);
+		super.paintAdditionalInfo(g);
 
 		int descriptionWidth = g.getFontMetrics().stringWidth(description);
 		int descriptionHeight = g.getFontMetrics().getHeight();
@@ -33,6 +40,24 @@ public class DescribedPlace extends NamedPlace {
 		setBounds(xPosition - 10, yPosition - 20, descriptionWidth + leftOffset, 50);
 
 		g.drawString(description, leftOffset, descriptionHeight * 2);
+
+	}
+
+	@Override
+	protected String getTypeAsString() {
+		
+		return "Described";
+
+	}
+
+	@Override
+	protected ArrayList<String> getAdditionalProperties() {
+
+		ArrayList<String> additionalProperties = super.getAdditionalProperties();
+		additionalProperties.add(description);
+
+		return additionalProperties;
+
 
 	}
 

@@ -3,6 +3,7 @@ package places;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.util.ArrayList;
 
 public abstract class Place extends JComponent {
 
@@ -85,7 +86,7 @@ public abstract class Place extends JComponent {
 
 	}
 
-	protected abstract void displayAdditionalInfo(Graphics g);
+	protected abstract void paintAdditionalInfo(Graphics g);
 
 	@Override
 	protected void paintComponent(Graphics g) {
@@ -108,10 +109,36 @@ public abstract class Place extends JComponent {
 
 		if(foldedOut) {
 			
-			displayAdditionalInfo(g);
+			paintAdditionalInfo(g);
 
 		}
 
 	}
+	
+	protected abstract String getTypeAsString();
 
+	protected abstract ArrayList<String> getAdditionalProperties();
+
+	@Override
+	public String toString() {
+		
+		String toString = String.format("%s,%s,%s,",
+				 		 getTypeAsString(),
+				    		 category,
+				    		 position);
+
+		ArrayList<String> additionalProperties = getAdditionalProperties();
+
+		for(String property : additionalProperties) {
+			
+			toString += property;
+
+			if(additionalProperties.indexOf(property) != additionalProperties.size() - 1) {	
+
+				toString += ",";
+			
+			}
+		}		
+		return toString;
+	}
 }

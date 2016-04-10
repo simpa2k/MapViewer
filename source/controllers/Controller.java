@@ -28,9 +28,8 @@ public class Controller {
 
 	}
 
-	private File openFileDialog() {
+	private File getFile(int okOrCancel) {
 
-		int okOrCancel = fileChooser.showOpenDialog(view);
 
 		if(okOrCancel == JFileChooser.APPROVE_OPTION) {
 
@@ -41,9 +40,17 @@ public class Controller {
 
 	}
 
+	private File openFile() {
+
+		int okOrCancel = fileChooser.showOpenDialog(view);
+		File selectedFile = getFile(okOrCancel);
+		
+		return selectedFile;
+	}
+
 	public void openMap() {
 		
-		File mapFile = openFileDialog();
+		File mapFile = openFile();
 
 		if(mapFile != null) {
 
@@ -61,7 +68,7 @@ public class Controller {
 			return;
 		}
 
-		File placesFile = openFileDialog();
+		File placesFile = openFile();
 
 		if(placesFile != null) {
 			
@@ -69,6 +76,19 @@ public class Controller {
 
 		}
 
+	}
+
+	public void savePlaces() {
+		
+		int okOrCancel = fileChooser.showSaveDialog(view);
+		File saveFile = getFile(okOrCancel);
+
+		if(saveFile != null) {
+			
+			model.savePlaces(saveFile.toPath());
+
+		}
+		
 	}
 
 	//Se över namngivningen här - båda de två nedanstående lägger till lyssnare på kartan
