@@ -27,13 +27,11 @@ public class Categories extends JPanel {
 		centerPanel.add(heading, BorderLayout.NORTH);
 
 		categoryList = new JList(categories);
-		categoryList.addListSelectionListener(event -> 
-											  controller.showCategory(event, categories[categoryList.getSelectedIndex()]));
+		categoryList.addListSelectionListener(event ->  controller.showCategory(event, categories[categoryList.getSelectedIndex()]));
 		centerPanel.add(categoryList, BorderLayout.CENTER);
 
 		JButton hideCategory = new JButton("Hide category");
-		hideCategory.addActionListener(event ->
-									   controller.hideCategory(categories[categoryList.getSelectedIndex()]));
+		hideCategory.addActionListener(event -> controller.hideCategory(categories[categoryList.getSelectedIndex()]));
 		centerPanel.add(hideCategory, BorderLayout.SOUTH);
 
 		c.gridx = 0;

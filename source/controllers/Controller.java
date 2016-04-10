@@ -9,7 +9,7 @@ import javax.swing.event.*;
 import java.io.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Controller {
 
@@ -151,7 +151,7 @@ public class Controller {
 	//Borde inte det här ske i ExistingPlaceController?
 	public void search(String query) {
 
-		ArrayList<Place> placesByName = model.getPlacesByName(query);
+		HashSet<Place> placesByName = model.getPlacesByName(query);
 
 		if(placesByName != null) {
 

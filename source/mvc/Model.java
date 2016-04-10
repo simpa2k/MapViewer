@@ -153,7 +153,7 @@ public class Model {
 
 	}
 
-	public ArrayList<Place> getPlacesByName(String name) {
+	public HashSet <Place> getPlacesByName(String name) {
 
 		return placesByName.get(name);
 
