@@ -69,14 +69,6 @@ public class View extends JFrame {
 
 	public void updatePlaces() {
 
-		if(imagePanel == null) {
-
-			//instantiateImagePanel();
-			JOptionPane.showMessageDialog(this, "No map chosen", "No map", JOptionPane.ERROR_MESSAGE);
-			return;
-
-		}
-
 		imagePanel.drawPlaces(model.getPlaces());
 
 		repaint();
@@ -95,20 +87,5 @@ public class View extends JFrame {
 
 	}
 
-	public static void main(String[] args) {
-
-		javax.swing.SwingUtilities.invokeLater(new Runnable() {
-
-			public void run() {
-
-				View view = new View();
-
-				view.setVisible(true);
-
-			}
-
-		});
-
-	}
 
 }

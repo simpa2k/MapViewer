@@ -29,6 +29,7 @@ public class MenuAndOptions extends JPanel {
 
 		JMenuItem save = new JMenuItem("Save");
 		JMenuItem exit = new JMenuItem("Exit");
+		exit.addActionListener(event -> System.exit(0));
 
 		archive.add(newMap);
 		archive.add(loadPlaces);
