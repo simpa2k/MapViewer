@@ -44,8 +44,8 @@ public class Model {
 		if(description == null) {
 			
 			NamedPlace namedPlace = new NamedPlace(category, 
-							       new Position(xPosition, yPosition), 
-							       name);
+												   new Position(xPosition, yPosition), 
+												   name);
 
 			namedPlace.addMouseListener(new ExistingPlaceController(namedPlace));
 			places.put(namedPlace.getPosition(), namedPlace);
@@ -54,9 +54,9 @@ public class Model {
 		} else {
 
 			DescribedPlace describedPlace = new DescribedPlace(category, 
-									   new Position(xPosition, yPosition), 
-									   name,
-									   description);
+															   new Position(xPosition, yPosition), 
+															   name,
+															   description);
 
 			describedPlace.addMouseListener(new ExistingPlaceController(describedPlace));
 			places.put(describedPlace.getPosition(), describedPlace);
@@ -89,7 +89,7 @@ public class Model {
 
 	public void loadPlaces(File placesFile) {
 
-		this.placesFile = placesFile;
+	        this.placesFile = placesFile;
 
 		try {
 			
