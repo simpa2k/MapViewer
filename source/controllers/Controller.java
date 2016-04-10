@@ -1,7 +1,7 @@
 package controllers;
 
 import mvc.*;
-import JPanels.ImagePanel;
+import jPanels.ImagePanel;
 import places.*;
 
 import javax.swing.*;

@@ -1,4 +1,4 @@
-package JPanels;
+package jPanels;
 
 import places.*;
 

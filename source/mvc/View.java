@@ -3,7 +3,7 @@ package mvc;
 import controllers.Controller;
 import places.*;
 
-import JPanels.*;
+import jPanels.*;
 import javax.swing.*;
 import java.awt.BorderLayout;
 import java.io.*;

@@ -1,7 +1,7 @@
 package controllers;
 
 import places.*;
-import JPanels.ImagePanel;
+import jPanels.ImagePanel;
 
 import javax.swing.*;
 import java.awt.event.*;

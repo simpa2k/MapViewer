@@ -1,6 +1,6 @@
 package controllers;
 
-import JPanels.ImagePanel;
+import jPanels.ImagePanel;
 import dialogs.*;
 
 import java.awt.event.*;
