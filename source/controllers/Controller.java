@@ -11,12 +11,18 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.HashSet;
 
+import javax.swing.filechooser.*;
+import javax.swing.filechooser.FileFilter;
+
 public class Controller {
 
 	private Model model;
 	private View view;
 
+	//Överväg att använda user.dir som argument till FileChooserkonstruktorn
 	private final JFileChooser fileChooser = new JFileChooser("../");
+	private FileFilter placesFilter = new FileNameExtensionFilter("Places", "places");
+	private FileFilter imageFilter = new FileNameExtensionFilter("Images", "jpg", "gif", "png");
 
 	private NewPlaceController newPlaceController;
 	private WhatIsHereController whatIsHereController;
@@ -29,7 +35,6 @@ public class Controller {
 	}
 
 	private File getFile(int okOrCancel) {
-
 
 		if(okOrCancel == JFileChooser.APPROVE_OPTION) {
 
@@ -50,6 +55,7 @@ public class Controller {
 
 	public void openMap() {
 		
+		fileChooser.setFileFilter(imageFilter);
 		File mapFile = openFile();
 
 		if(mapFile != null) {
@@ -68,6 +74,7 @@ public class Controller {
 			return;
 		}
 
+		fileChooser.setFileFilter(placesFilter);
 		File placesFile = openFile();
 
 		if(placesFile != null) {

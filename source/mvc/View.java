@@ -42,6 +42,8 @@ public class View extends JFrame {
 
 		imagePanel = new ImagePanel();
 		JScrollPane imageScrollPane = new JScrollPane(imagePanel);
+		imageScrollPane.setBorder(null);
+
 		add(imageScrollPane, BorderLayout.CENTER);
 
 	}
@@ -61,8 +63,9 @@ public class View extends JFrame {
 		}
 
 		imagePanel.setMap(model.getMapFile());
-
+		
 		pack();
+		validate();
 		repaint();
 
 	}
@@ -78,6 +81,7 @@ public class View extends JFrame {
 	public void drawPlace(Position position) {
 
 		imagePanel.drawPlace(model.getPlace(position));
+		imagePanel.repaint();
 
 	}
 
