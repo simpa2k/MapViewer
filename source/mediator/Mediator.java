@@ -96,10 +96,10 @@ public class Mediator {
 	
 	public void removeMapListener() {
 
-			ImagePanel mapPanel = view.getImagePanel();
+		ImagePanel mapPanel = view.getImagePanel();
 
-			setDefaultCursor(mapPanel);
-			mapPanel.removeMouseListener(newPlaceListener);
+		setDefaultCursor(mapPanel);
+		mapPanel.removeMouseListener(newPlaceListener);
 
 	}
 
@@ -164,25 +164,6 @@ public class Mediator {
 	public void hideCategory(String selectedCategory) {
 
 		model.setCategoryToVisible(selectedCategory, false);
-
-	}
-
-	public void removeMarkedPlaces() {
-
-		model.getPlaces().forEach( (position, place) -> {
-
-			if(place.getMarked()) {
-
-				view.getImagePanel().remove(place);
-
-			}
-
-		});
-
-		model.removeMarkedPlaces();
-
-		view.revalidate();
-		view.repaint();
 
 	}
 
