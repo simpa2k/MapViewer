@@ -44,8 +44,8 @@ public class Model {
 		if(description == null) {
 			
 			NamedPlace namedPlace = new NamedPlace(category, 
-												   new Position(xPosition, yPosition), 
-												   name);
+							       new Position(xPosition, yPosition), 
+							       name);
 
 			namedPlace.addMouseListener(new ExistingPlaceController(namedPlace));
 			places.put(namedPlace.getPosition(), namedPlace);
@@ -54,10 +54,10 @@ public class Model {
 		} else {
 
 			DescribedPlace describedPlace = new DescribedPlace(category, 
-															   new Position(xPosition, yPosition), 
-															   name,
-															   description);
-
+									   new Position(xPosition, yPosition), 
+									   name,
+									   description);
+			System.out.println(describedPlace.getCategory());
 			describedPlace.addMouseListener(new ExistingPlaceController(describedPlace));
 			places.put(describedPlace.getPosition(), describedPlace);
 			placesByName.put(describedPlace.getName(), describedPlace);
@@ -75,7 +75,7 @@ public class Model {
 			int xPosition = Integer.parseInt(properties[2]);
 			int yPosition = Integer.parseInt(properties[3]);
 			String name = properties[4];
-			String description = properties.length == 6 ? properties[6] : null;
+			String description = properties.length == 6 ? properties[5] : null;
 
 			createPlace(category, xPosition, yPosition, name, description);
 
@@ -162,10 +162,10 @@ public class Model {
 			Place place = entry.getValue();
 
 			boolean isSufficientlyCloseX = ( positionToCheck.getX() >= (position.getX() - 10) ) && 
-										   ( positionToCheck.getX() <= (position.getX() + 10) );
+						       ( positionToCheck.getX() <= (position.getX() + 10) );
 
 			boolean isSufficientlyCloseY = ( positionToCheck.getY() >= (position.getY() - 10) ) && 
-										   ( positionToCheck.getY() <= (position.getY() + 10) );
+						       ( positionToCheck.getY() <= (position.getY() + 10) );
 
 			if(isSufficientlyCloseX && isSufficientlyCloseY) {
 

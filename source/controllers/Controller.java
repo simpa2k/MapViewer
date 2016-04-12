@@ -97,19 +97,40 @@ public class Controller {
 		}
 		
 	}
+ 	
+	private void setCrosshairCursor(JPanel panel) {
+
+		panel.setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
+	}
+
+	private void setDefaultCursor(JPanel panel) {
+
+		panel.setCursor(Cursor.getDefaultCursor());
+
+	}
 
 	//Se över namngivningen här - båda de två nedanstående lägger till lyssnare på kartan
 	public void addMapListener(String selectedType) {
 
 		ImagePanel mapPanel = view.getImagePanel();
 
-		if(mapPanel != null) {
+		if( (mapPanel != null) && (mapPanel.getMouseListeners().length == 0) ) {
 
-			mapPanel.setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
+			setCrosshairCursor(mapPanel);
+			
 			newPlaceController = new NewPlaceController(this, mapPanel, selectedType);
-
 			mapPanel.addMouseListener(newPlaceController);
+
 		}
+
+	}
+	
+	public void removeMapListener() {
+
+			ImagePanel mapPanel = view.getImagePanel();
+
+			setDefaultCursor(mapPanel);
+			mapPanel.removeMouseListener(newPlaceController);
 
 	}
 
@@ -117,7 +138,9 @@ public class Controller {
 
 		ImagePanel mapPanel = view.getImagePanel();
 
-		if(mapPanel != null) {
+		if( (mapPanel != null) && (mapPanel.getMouseListeners().length == 0) ){
+			
+			setCrosshairCursor(mapPanel);
 
 			whatIsHereController = new WhatIsHereController(model, this);
 			mapPanel.addMouseListener(whatIsHereController);
@@ -132,6 +155,7 @@ public class Controller {
 
 		if(mapPanel != null) {
 
+			setDefaultCursor(mapPanel);
 			mapPanel.removeMouseListener(whatIsHereController);
 
 		}
@@ -151,9 +175,8 @@ public class Controller {
 
 			//Det här är inte världens snyggate lösning
 			view.drawPlace(new Position(xPosition, yPosition));
-
-			mapPanel.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-			mapPanel.removeMouseListener(newPlaceController);
+			
+			removeMapListener();
 
 		}
 

@@ -30,9 +30,9 @@ public class NamedPlace extends Place {
 		int xPosition = getPosition().getX();
 		int yPosition = getPosition().getY();
 
-		int leftOffset = 30;
+		int leftOffset = getTriangleWidth() + 10;
 
-		setBounds(xPosition - 10, yPosition - 20, nameWidth + leftOffset, 20);
+		setBounds(getX(), getY(), nameWidth + leftOffset, getHeight());
 
 		g.setColor(Color.BLACK);
 

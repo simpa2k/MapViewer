@@ -12,12 +12,25 @@ public abstract class Place extends JComponent {
 	private boolean marked = false;
 	private boolean foldedOut = false;
 
+	Triangle triangle;
+	Rectangle border; //Might it be better to actually use Border?
+
+
 	public Place(String category, Position position) {
 
 		this.category = category;
 		this.position = position;
 
 		setBounds(position.getX() - 10, position.getY() - 20, 20, 20);
+
+		triangle = new Triangle(getWidth(), getHeight(), resolveColor());
+		border = new Rectangle(new Dimension(getWidth(), getHeight()));
+
+	}
+	
+	protected int getTriangleWidth() {
+
+		return triangle.getWidth();
 
 	}
 
@@ -90,26 +103,22 @@ public abstract class Place extends JComponent {
 
 	@Override
 	protected void paintComponent(Graphics g) {
-
+		
 		super.paintComponent(g);
-		g.setColor(resolveColor());
+		Graphics2D g2d = (Graphics2D) g;
 
-		int[] xPoints = {10, 0, 20};
-		int[] yPoints = {20, 0, 0};
-		int nPoints = 3;
-
-		g.fillPolygon(xPoints, yPoints, nPoints);
+		add(triangle);
 
 		if(marked) {
 
-			g.setColor(Color.RED);
-			g.drawRect(0, 0, 20, 20);
+			g2d.setColor(Color.RED);
+			g2d.draw(border);
 
 		}
 
 		if(foldedOut) {
 			
-			paintAdditionalInfo(g);
+			paintAdditionalInfo(g2d);
 
 		}
 

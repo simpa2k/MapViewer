@@ -6,7 +6,7 @@ import dialogs.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class NewPlaceController implements MouseListener {
+public class NewPlaceController extends MouseAdapter {
 
 	private Controller parentController;
 	private ImagePanel mapView;
@@ -64,35 +64,10 @@ public class NewPlaceController implements MouseListener {
 
 			getInput(e, placeDialog);
 
+		} else {
+				
+			parentController.removeMapListener();
+
 		}
 	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-
-
-
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-
-
-
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-
-
-
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-
-
-
-	}
-
 }

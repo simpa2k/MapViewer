@@ -5,7 +5,7 @@ import places.*;
 
 import java.awt.event.*;
 
-public class WhatIsHereController implements MouseListener {
+public class WhatIsHereController extends MouseAdapter {
 
 	Model model;
 	Controller parentController;
@@ -33,34 +33,6 @@ public class WhatIsHereController implements MouseListener {
 		}
 
 		parentController.removeWhatIsHereController();
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-
-
-
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-
-
-
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-
-
-
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-
-
-
 	}
 
 }

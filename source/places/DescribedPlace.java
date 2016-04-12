@@ -8,9 +8,9 @@ public class DescribedPlace extends NamedPlace {
 	private String description;
 
 	public DescribedPlace(String category, 
-						  Position position, 
-						  String name, 
-						  String description) {
+			      Position position, 
+			      String name, 
+			      String description) {
 
 		super(category, position, name);
 
@@ -35,9 +35,9 @@ public class DescribedPlace extends NamedPlace {
 		int xPosition = getPosition().getX();
 		int yPosition = getPosition().getY();
 
-		int leftOffset = 30;
+		int leftOffset = getTriangleWidth() + 10;
 
-		setBounds(xPosition - 10, yPosition - 20, descriptionWidth + leftOffset, 50);
+		setBounds(getX(), getY(), descriptionWidth + leftOffset, descriptionHeight * 3);
 
 		g.drawString(description, leftOffset, descriptionHeight * 2);
 
