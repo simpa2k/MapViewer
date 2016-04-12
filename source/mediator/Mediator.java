@@ -151,20 +151,4 @@ public class Mediator {
 
 	}
 
-	public void showCategory(ListSelectionEvent event, String selectedCategory) {
-
-		if(!event.getValueIsAdjusting()) {
-
-			model.setCategoryToVisible(selectedCategory, true);
-
-		}
-
-	}
-
-	public void hideCategory(String selectedCategory) {
-
-		model.setCategoryToVisible(selectedCategory, false);
-
-	}
-
 }

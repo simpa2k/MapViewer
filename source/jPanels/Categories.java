@@ -2,19 +2,20 @@ package jPanels;
 
 import mvc.*;
 import mediator.Mediator;
+import places.Place;
+import listeners.PlaceVisibilityModifier;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.function.*;
 
 public class Categories extends JPanel {
-
-	private Mediator mediator;
 
 	String[] categories = {"Buss", "Tunnelbana", "Tåg"};
 	private JList categoryList; 
 
-	public Categories(Mediator mediator) {
+	public Categories(Mediator mediator, View parentFrame) {
 
 		setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
@@ -27,11 +28,11 @@ public class Categories extends JPanel {
 		centerPanel.add(heading, BorderLayout.NORTH);
 
 		categoryList = new JList(categories);
-		categoryList.addListSelectionListener(event ->  mediator.showCategory(event, categories[categoryList.getSelectedIndex()]));
+		categoryList.addListSelectionListener(new PlaceVisibilityModifier(parentFrame.getModel(), matchesSelectedCategory(), true));
 		centerPanel.add(categoryList, BorderLayout.CENTER);
 
 		JButton hideCategory = new JButton("Hide category");
-		hideCategory.addActionListener(event -> mediator.hideCategory(categories[categoryList.getSelectedIndex()]));
+		hideCategory.addActionListener(new PlaceVisibilityModifier(parentFrame.getModel(), matchesSelectedCategory(), false)); 
 		centerPanel.add(hideCategory, BorderLayout.SOUTH);
 
 		c.gridx = 0;
@@ -44,6 +45,12 @@ public class Categories extends JPanel {
 	public String getSelectedCategory() {
 
 		return categories[categoryList.getSelectedIndex()];
+
+	}
+
+	private Predicate<Place> matchesSelectedCategory() {
+		
+		return place -> place.getCategory().equals(getSelectedCategory());
 
 	}
 

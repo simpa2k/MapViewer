@@ -63,7 +63,7 @@ public class MenuAndOptions extends JPanel {
 		optionBar.add(searchButton);
 
 		JButton hideButton = new JButton("Hide");
-		hideButton.addActionListener(new PlaceHider(parentFrame.getModel()));
+		hideButton.addActionListener(new PlaceVisibilityModifier(parentFrame.getModel(), (place -> place.getMarked()), false));
 		optionBar.add(hideButton);
 
 		JButton removeButton = new JButton("Remove");

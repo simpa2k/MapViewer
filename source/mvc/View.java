@@ -28,7 +28,7 @@ public class View extends JFrame {
 		MenuAndOptions menuAndOptions = new MenuAndOptions(this, mediator);
 		add(menuAndOptions, BorderLayout.NORTH);
 
-		categories = new Categories(mediator);
+		categories = new Categories(mediator, this);
 		add(categories, BorderLayout.EAST);
 
 		setName("Inlupp2");

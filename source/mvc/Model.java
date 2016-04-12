@@ -197,18 +197,4 @@ public class Model {
 
 	}
 
-	public void setCategoryToVisible(String category, boolean trueOrFalse) {
-
-		places.forEach( (position, place) -> {
-		
-			if(place.getCategory().equals(category)) {
-
-				place.setVisible(trueOrFalse);
-
-			}
-
-		});
-
-	}
-
 }
