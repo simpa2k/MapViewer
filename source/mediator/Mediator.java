@@ -21,7 +21,7 @@ public class Mediator {
 	private View view;
 
 	//Överväg att använda user.dir som argument till FileChooserkonstruktorn
-	private final JFileChooser fileChooser = new JFileChooser("../");
+	FileDialogHandler fileDialogHandler = new FileDialogHandler();
 	private FileFilter placesFilter = new FileNameExtensionFilter("Places", "places");
 	private FileFilter imageFilter = new FileNameExtensionFilter("Images", "jpg", "gif", "png");
 
@@ -35,35 +35,10 @@ public class Mediator {
 
 	}
 
-	private File getFile(int okOrCancel) {
-
-		if(okOrCancel == JFileChooser.APPROVE_OPTION) {
-
-			return fileChooser.getSelectedFile();
-
-		}
-		return null;
-
-	}
-
-	private File openFile() {
-
-		int okOrCancel = fileChooser.showOpenDialog(view);
-		File selectedFile = getFile(okOrCancel);
-		
-		return selectedFile;
-	}
-
 	public void openMap() {
 		
-		fileChooser.setFileFilter(imageFilter);
-		File mapFile = openFile();
-
-		if(mapFile != null) {
-
-			model.setMapFile(mapFile);
-
-		}
+		File mapFile = fileDialogHandler.openFile(view, imageFilter);		
+		model.setMapFile(mapFile);
 
 	}
 
@@ -75,33 +50,26 @@ public class Mediator {
 			return;
 		}
 
-		fileChooser.setFileFilter(placesFilter);
-		File placesFile = openFile();
-
-		if(placesFile != null) {
-			
-			model.loadPlaces(placesFile);
-
-		}
+		File placesFile = fileDialogHandler.openFile(view, placesFilter);
+		model.loadPlaces(placesFile);
 
 	}
 
 	public void savePlaces() {
 		
-		int okOrCancel = fileChooser.showSaveDialog(view);
-		File saveFile = getFile(okOrCancel);
-
+		File saveFile = fileDialogHandler.getSaveFile(view);
 		if(saveFile != null) {
-			
+
 			model.savePlaces(saveFile.toPath());
 
 		}
-		
 	}
+
  	
 	private void setCrosshairCursor(JPanel panel) {
 
 		panel.setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
+
 	}
 
 	private void setDefaultCursor(JPanel panel) {
