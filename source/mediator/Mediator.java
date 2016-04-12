@@ -21,7 +21,7 @@ public class Mediator {
 	private View view;
 
 	//Överväg att använda user.dir som argument till FileChooserkonstruktorn
-	FileDialogHandler fileDialogHandler = new FileDialogHandler();
+	private FileDialogHandler fileDialogHandler = new FileDialogHandler();
 	private FileFilter placesFilter = new FileNameExtensionFilter("Places", "places");
 	private FileFilter imageFilter = new FileNameExtensionFilter("Images", "jpg", "gif", "png");
 
