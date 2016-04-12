@@ -167,40 +167,6 @@ public class Mediator {
 
 	}
 
-	//Borde inte det här ske i ExistingPlaceController?
-	public void search(String query) {
-
-		HashSet<Place> placesByName = model.getPlacesByName(query);
-
-		if(placesByName != null) {
-
-			for(Place place : placesByName) {
-			
-				place.setVisible(true);
-				place.setMarked(true);
-
-				view.repaint();
-
-			}
-
-		}
-
-	}
-
-	public void hideSelectedPlaces() {
-
-		model.getPlaces().forEach( (position, place) -> {
-
-			if(place.getMarked()) {
-
-				place.setVisible(false);
-
-			}
-
-		});
-
-	}
-
 	public void removeMarkedPlaces() {
 
 		model.getPlaces().forEach( (position, place) -> {

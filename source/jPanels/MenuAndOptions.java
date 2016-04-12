@@ -59,11 +59,11 @@ public class MenuAndOptions extends JPanel {
 		optionBar.add(searchField);
 
 		JButton searchButton = new JButton("Search");
-		searchButton.addActionListener(new NameSearchListener(parentFrame.getModel(), searchField));
+		searchButton.addActionListener(new NameSearcher(parentFrame.getModel(), searchField));
 		optionBar.add(searchButton);
 
 		JButton hideButton = new JButton("Hide");
-		hideButton.addActionListener(event -> mediator.hideSelectedPlaces());
+		hideButton.addActionListener(new PlaceHider(parentFrame.getModel()));
 		optionBar.add(hideButton);
 
 		JButton removeButton = new JButton("Remove");
