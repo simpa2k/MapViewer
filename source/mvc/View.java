@@ -25,7 +25,7 @@ public class View extends JFrame {
 		mediator = new Mediator(model, this);
 		this.mediator = mediator;
 
-		MenuAndOptions menuAndOptions = new MenuAndOptions(mediator);
+		MenuAndOptions menuAndOptions = new MenuAndOptions(this, mediator);
 		add(menuAndOptions, BorderLayout.NORTH);
 
 		categories = new Categories(mediator);
@@ -88,6 +88,12 @@ public class View extends JFrame {
 	public String getSelectedCategory() {
 
 		return categories.getSelectedCategory();
+
+	}
+
+	public Model getModel() {
+		
+		return model;
 
 	}
 

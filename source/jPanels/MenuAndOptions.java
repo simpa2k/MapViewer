@@ -2,6 +2,7 @@ package jPanels;
 
 import mvc.*;
 import mediator.Mediator;
+import listeners.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,9 +10,13 @@ import java.awt.*;
 public class MenuAndOptions extends JPanel {
 
 	Mediator mediator;
+	View parentFrame;
 
-	public MenuAndOptions(Mediator mediator) {
+	JTextField searchField;
 
+	public MenuAndOptions(View parentFrame, Mediator mediator) {
+		
+		this.parentFrame = parentFrame;
 		this.mediator = mediator;
 
 		setLayout(new GridLayout(0, 1));
@@ -54,7 +59,7 @@ public class MenuAndOptions extends JPanel {
 		optionBar.add(searchField);
 
 		JButton searchButton = new JButton("Search");
-		searchButton.addActionListener(event -> mediator.search(searchField.getText()));
+		searchButton.addActionListener(new NameSearchListener(parentFrame.getModel(), searchField));
 		optionBar.add(searchButton);
 
 		JButton hideButton = new JButton("Hide");
@@ -72,5 +77,5 @@ public class MenuAndOptions extends JPanel {
 		add(optionBar);
 
 	}
-
+	
 }

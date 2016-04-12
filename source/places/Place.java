@@ -69,15 +69,26 @@ public abstract class Place extends JComponent {
 
 	}
 
+	public void makeVisibleAndMarked() {
+
+		setVisible(true);
+		setMarked(true);
+
+		repaint();
+
+	}
+
 	public void setMarked() {
 
 		marked = !marked;
+		repaint();
 
 	}
 
 	public void setMarked(boolean markedOrNot) {
 
 		marked = markedOrNot;
+		repaint();
 
 	}
 
@@ -90,6 +101,7 @@ public abstract class Place extends JComponent {
 	public void setFolded() {
 
 		foldedOut = !foldedOut;
+		repaint();
 
 	}
 
