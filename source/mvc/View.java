@@ -14,6 +14,7 @@ public class View extends JFrame {
 	private Mediator mediator;
 
 	private ImagePanel imagePanel;
+	private MenuAndOptions menuAndOptions;
 	private Categories categories;
 
 	public View() {
@@ -25,7 +26,7 @@ public class View extends JFrame {
 		mediator = new Mediator(model, this);
 		this.mediator = mediator;
 
-		MenuAndOptions menuAndOptions = new MenuAndOptions(this, mediator);
+		menuAndOptions = new MenuAndOptions(this, mediator);
 		add(menuAndOptions, BorderLayout.NORTH);
 
 		categories = new Categories(mediator, this);
@@ -43,9 +44,10 @@ public class View extends JFrame {
 		imagePanel = new ImagePanel();
 		JScrollPane imageScrollPane = new JScrollPane(imagePanel);
 		imageScrollPane.setBorder(null);
-
+		
 		add(imageScrollPane, BorderLayout.CENTER);
-
+		
+		menuAndOptions.makeMenuItemsEnabled();	
 	}
 
 	public ImagePanel getImagePanel() {

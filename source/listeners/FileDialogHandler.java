@@ -1,4 +1,4 @@
-package mediator;
+package listeners;
 
 import java.io.File;
 import javax.swing.JFrame;

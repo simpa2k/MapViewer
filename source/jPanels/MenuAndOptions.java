@@ -12,6 +12,9 @@ public class MenuAndOptions extends JPanel {
 	Mediator mediator;
 	View parentFrame;
 
+	JMenuItem loadPlaces;
+	JMenuItem save;
+
 	JTextField searchField;
 
 	public MenuAndOptions(View parentFrame, Mediator mediator) {
@@ -27,13 +30,16 @@ public class MenuAndOptions extends JPanel {
 		menuBar.add(archive);
 
 		JMenuItem newMap = new JMenuItem("New Map");
-		newMap.addActionListener(event -> mediator.openMap());
+		newMap.addActionListener(new MapOpener(parentFrame.getModel()));
 
-		JMenuItem loadPlaces = new JMenuItem("Load Places");
-		loadPlaces.addActionListener(event -> mediator.openPlaces());
+		loadPlaces = new JMenuItem("Load Places");
+		loadPlaces.addActionListener(new PlaceOpener(parentFrame.getModel()));
+		loadPlaces.setEnabled(false);
 
-		JMenuItem save = new JMenuItem("Save");
-		save.addActionListener(event -> mediator.savePlaces());
+		save = new JMenuItem("Save");
+//		save.addActionListener(event -> mediator.savePlaces());
+		save.addActionListener(new PlaceSaver(parentFrame.getModel()));
+		save.setEnabled(false);
 
 		JMenuItem exit = new JMenuItem("Exit");
 		exit.addActionListener(event -> System.exit(0));
@@ -78,4 +84,10 @@ public class MenuAndOptions extends JPanel {
 
 	}
 	
+	public void makeMenuItemsEnabled() {
+		
+		loadPlaces.setEnabled(true);
+		save.setEnabled(true);		
+
+	}
 }
