@@ -1,8 +1,9 @@
-package controllers;
+package mediator;
 
 import mvc.*;
 import jPanels.ImagePanel;
 import places.*;
+import listeners.*;
 
 import javax.swing.*;
 import javax.swing.event.*;
@@ -14,7 +15,7 @@ import java.util.HashSet;
 import javax.swing.filechooser.*;
 import javax.swing.filechooser.FileFilter;
 
-public class Controller {
+public class Mediator {
 
 	private Model model;
 	private View view;
@@ -24,10 +25,10 @@ public class Controller {
 	private FileFilter placesFilter = new FileNameExtensionFilter("Places", "places");
 	private FileFilter imageFilter = new FileNameExtensionFilter("Images", "jpg", "gif", "png");
 
-	private NewPlaceController newPlaceController;
-	private WhatIsHereController whatIsHereController;
+	private NewPlaceListener newPlaceListener;
+	private WhatIsHereListener whatIsHereListener;
 
-	public Controller(Model model, View view) {
+	public Mediator(Model model, View view) {
 
 		this.model = model;
 		this.view = view;
@@ -118,8 +119,8 @@ public class Controller {
 
 			setCrosshairCursor(mapPanel);
 			
-			newPlaceController = new NewPlaceController(this, mapPanel, selectedType);
-			mapPanel.addMouseListener(newPlaceController);
+			newPlaceListener = new NewPlaceListener(this, mapPanel, selectedType);
+			mapPanel.addMouseListener(newPlaceListener);
 
 		}
 
@@ -130,11 +131,11 @@ public class Controller {
 			ImagePanel mapPanel = view.getImagePanel();
 
 			setDefaultCursor(mapPanel);
-			mapPanel.removeMouseListener(newPlaceController);
+			mapPanel.removeMouseListener(newPlaceListener);
 
 	}
 
-	public void addWhatIsHereController() {
+	public void addWhatIsHereListener() {
 
 		ImagePanel mapPanel = view.getImagePanel();
 
@@ -142,27 +143,27 @@ public class Controller {
 			
 			setCrosshairCursor(mapPanel);
 
-			whatIsHereController = new WhatIsHereController(model, this);
-			mapPanel.addMouseListener(whatIsHereController);
+			whatIsHereListener = new WhatIsHereListener(model, this);
+			mapPanel.addMouseListener(whatIsHereListener);
 
 		}
 
 	}
 
-	public void removeWhatIsHereController() {
+	public void removeWhatIsHereListener() {
 
 		ImagePanel mapPanel = view.getImagePanel();
 
 		if(mapPanel != null) {
 
 			setDefaultCursor(mapPanel);
-			mapPanel.removeMouseListener(whatIsHereController);
+			mapPanel.removeMouseListener(whatIsHereListener);
 
 		}
 
 	}
 
-	protected void createPlace(int xPosition, int yPosition, String name, String description) {
+	public void createPlace(int xPosition, int yPosition, String name, String description) {
 
 		ImagePanel mapPanel = view.getImagePanel();
 

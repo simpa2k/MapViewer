@@ -1,7 +1,7 @@
 package mvc;
 
 import places.*;
-import controllers.ExistingPlaceController;
+import listeners.ExistingPlaceListener;
 
 import java.io.*;
 import java.nio.*;
@@ -47,7 +47,7 @@ public class Model {
 							       new Position(xPosition, yPosition), 
 							       name);
 
-			namedPlace.addMouseListener(new ExistingPlaceController(namedPlace));
+			namedPlace.addMouseListener(new ExistingPlaceListener(namedPlace));
 			places.put(namedPlace.getPosition(), namedPlace);
 			placesByName.put(namedPlace.getName(), namedPlace);
 
@@ -58,7 +58,7 @@ public class Model {
 									   name,
 									   description);
 			System.out.println(describedPlace.getCategory());
-			describedPlace.addMouseListener(new ExistingPlaceController(describedPlace));
+			describedPlace.addMouseListener(new ExistingPlaceListener(describedPlace));
 			places.put(describedPlace.getPosition(), describedPlace);
 			placesByName.put(describedPlace.getName(), describedPlace);
 			

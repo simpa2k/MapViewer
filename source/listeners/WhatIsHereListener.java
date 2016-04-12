@@ -1,19 +1,20 @@
-package controllers;
+package listeners;
 
+import mediator.Mediator;
 import mvc.Model;
 import places.*;
 
 import java.awt.event.*;
 
-public class WhatIsHereController extends MouseAdapter {
+public class WhatIsHereListener extends MouseAdapter {
 
 	Model model;
-	Controller parentController;
+	Mediator mediator;
 
-	public WhatIsHereController(Model model, Controller parentController) {
+	public WhatIsHereListener(Model model, Mediator mediator) {
 
 		this.model = model;
-		this.parentController = parentController;
+		this.mediator = mediator;
 
 	}
 
@@ -32,7 +33,7 @@ public class WhatIsHereController extends MouseAdapter {
 
 		}
 
-		parentController.removeWhatIsHereController();
+		mediator.removeWhatIsHereListener();
 	}
 
 }

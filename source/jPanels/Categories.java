@@ -1,7 +1,7 @@
 package jPanels;
 
 import mvc.*;
-import controllers.Controller;
+import mediator.Mediator;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,12 +9,12 @@ import java.awt.event.*;
 
 public class Categories extends JPanel {
 
-	private Controller controller;
+	private Mediator mediator;
 
 	String[] categories = {"Buss", "Tunnelbana", "Tåg"};
 	private JList categoryList; 
 
-	public Categories(Controller controller) {
+	public Categories(Mediator mediator) {
 
 		setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
@@ -27,11 +27,11 @@ public class Categories extends JPanel {
 		centerPanel.add(heading, BorderLayout.NORTH);
 
 		categoryList = new JList(categories);
-		categoryList.addListSelectionListener(event ->  controller.showCategory(event, categories[categoryList.getSelectedIndex()]));
+		categoryList.addListSelectionListener(event ->  mediator.showCategory(event, categories[categoryList.getSelectedIndex()]));
 		centerPanel.add(categoryList, BorderLayout.CENTER);
 
 		JButton hideCategory = new JButton("Hide category");
-		hideCategory.addActionListener(event -> controller.hideCategory(categories[categoryList.getSelectedIndex()]));
+		hideCategory.addActionListener(event -> mediator.hideCategory(categories[categoryList.getSelectedIndex()]));
 		centerPanel.add(hideCategory, BorderLayout.SOUTH);
 
 		c.gridx = 0;

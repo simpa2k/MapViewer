@@ -1,20 +1,21 @@
-package controllers;
+package listeners;
 
+import mediator.Mediator;
 import jPanels.ImagePanel;
 import dialogs.*;
 
 import java.awt.event.*;
 import javax.swing.*;
 
-public class NewPlaceController extends MouseAdapter {
+public class NewPlaceListener extends MouseAdapter {
 
-	private Controller parentController;
+	private Mediator mediator;
 	private ImagePanel mapView;
 	private String selectedType;
 
-	public NewPlaceController(Controller parentController, ImagePanel mapView, String selectedType) {
+	public NewPlaceListener(Mediator mediator, ImagePanel mapView, String selectedType) {
 
-		this.parentController = parentController;
+		this.mediator = mediator;
 		this.mapView = mapView;
 		this.selectedType = selectedType;
 
@@ -38,11 +39,11 @@ public class NewPlaceController extends MouseAdapter {
 		switch(selectedType) {
 
 			case "Named":
-				parentController.createPlace(e.getX(), e.getY(), placeDialog.getNameInput(), null);
+				mediator.createPlace(e.getX(), e.getY(), placeDialog.getNameInput(), null);
 				break;
 			case "Described":
 				DescribedPlaceDialog describedPlaceDialog = (DescribedPlaceDialog) placeDialog;
-				parentController.createPlace(e.getX(), e.getY(), describedPlaceDialog.getNameInput(), describedPlaceDialog.getDescriptionInput());
+				mediator.createPlace(e.getX(), e.getY(), describedPlaceDialog.getNameInput(), describedPlaceDialog.getDescriptionInput());
 				break;
 
 		}
@@ -66,7 +67,7 @@ public class NewPlaceController extends MouseAdapter {
 
 		} else {
 				
-			parentController.removeMapListener();
+			mediator.removeMapListener();
 
 		}
 	}

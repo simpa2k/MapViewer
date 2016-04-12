@@ -1,18 +1,18 @@
 package jPanels;
 
 import mvc.*;
-import controllers.Controller;
+import mediator.Mediator;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class MenuAndOptions extends JPanel {
 
-	Controller controller;
+	Mediator mediator;
 
-	public MenuAndOptions(Controller controller) {
+	public MenuAndOptions(Mediator mediator) {
 
-		this.controller = controller;
+		this.mediator = mediator;
 
 		setLayout(new GridLayout(0, 1));
 
@@ -22,13 +22,13 @@ public class MenuAndOptions extends JPanel {
 		menuBar.add(archive);
 
 		JMenuItem newMap = new JMenuItem("New Map");
-		newMap.addActionListener(event -> controller.openMap());
+		newMap.addActionListener(event -> mediator.openMap());
 
 		JMenuItem loadPlaces = new JMenuItem("Load Places");
-		loadPlaces.addActionListener(event -> controller.openPlaces());
+		loadPlaces.addActionListener(event -> mediator.openPlaces());
 
 		JMenuItem save = new JMenuItem("Save");
-		save.addActionListener(event -> controller.savePlaces());
+		save.addActionListener(event -> mediator.savePlaces());
 
 		JMenuItem exit = new JMenuItem("Exit");
 		exit.addActionListener(event -> System.exit(0));
@@ -47,26 +47,26 @@ public class MenuAndOptions extends JPanel {
 
 		String[] typesOfPlaces = {"Named", "Described"};
 		JComboBox namedOrDescribed = new JComboBox(typesOfPlaces);
-		namedOrDescribed.addActionListener(event -> controller.addMapListener(typesOfPlaces[namedOrDescribed.getSelectedIndex()]));
+		namedOrDescribed.addActionListener(event -> mediator.addMapListener(typesOfPlaces[namedOrDescribed.getSelectedIndex()]));
 		optionBar.add(namedOrDescribed);
 
 		JTextField searchField = new JTextField("Search", 10);
 		optionBar.add(searchField);
 
 		JButton searchButton = new JButton("Search");
-		searchButton.addActionListener(event -> controller.search(searchField.getText()));
+		searchButton.addActionListener(event -> mediator.search(searchField.getText()));
 		optionBar.add(searchButton);
 
 		JButton hideButton = new JButton("Hide");
-		hideButton.addActionListener(event -> controller.hideSelectedPlaces());
+		hideButton.addActionListener(event -> mediator.hideSelectedPlaces());
 		optionBar.add(hideButton);
 
 		JButton removeButton = new JButton("Remove");
-		removeButton.addActionListener(event -> controller.removeMarkedPlaces());
+		removeButton.addActionListener(event -> mediator.removeMarkedPlaces());
 		optionBar.add(removeButton);
 
 		JButton whatIsHereButton = new JButton("What is here?");
-		whatIsHereButton.addActionListener(event -> controller.addWhatIsHereController());
+		whatIsHereButton.addActionListener(event -> mediator.addWhatIsHereListener());
 		optionBar.add(whatIsHereButton);
 
 		add(optionBar);

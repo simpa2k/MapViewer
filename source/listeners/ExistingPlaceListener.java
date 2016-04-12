@@ -1,16 +1,17 @@
-package controllers;
+package listeners;
 
+import mediator.Mediator;
 import places.*;
 import jPanels.ImagePanel;
 
 import javax.swing.*;
 import java.awt.event.*;
 
-public class ExistingPlaceController extends MouseAdapter {
+public class ExistingPlaceListener extends MouseAdapter {
 
 	private Place model;
 
-	public ExistingPlaceController(Place model) {
+	public ExistingPlaceListener(Place model) {
 
 		this.model = model;
 

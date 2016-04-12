@@ -1,6 +1,6 @@
 package mvc;
 
-import controllers.Controller;
+import mediator.Mediator;
 import places.*;
 
 import jPanels.*;
@@ -11,7 +11,7 @@ import java.io.*;
 public class View extends JFrame {
 
 	private Model model;
-	private Controller controller;
+	private Mediator mediator;
 
 	private ImagePanel imagePanel;
 	private Categories categories;
@@ -22,13 +22,13 @@ public class View extends JFrame {
 		this.model = model;
 		model.setView(this);
 
-		controller = new Controller(model, this);
-		this.controller = controller;
+		mediator = new Mediator(model, this);
+		this.mediator = mediator;
 
-		MenuAndOptions menuAndOptions = new MenuAndOptions(controller);
+		MenuAndOptions menuAndOptions = new MenuAndOptions(mediator);
 		add(menuAndOptions, BorderLayout.NORTH);
 
-		categories = new Categories(controller);
+		categories = new Categories(mediator);
 		add(categories, BorderLayout.EAST);
 
 		setName("Inlupp2");
