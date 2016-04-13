@@ -1,7 +1,6 @@
 package listeners;
 
 import mvc.*;
-import jPanels.MenuAndOptions;
 
 import places.Place;
 import java.awt.event.*;

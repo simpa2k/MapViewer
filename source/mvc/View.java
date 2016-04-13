@@ -2,6 +2,7 @@ package mvc;
 
 import mediator.Mediator;
 import places.*;
+import listeners.*;
 
 import jPanels.*;
 import javax.swing.*;
@@ -13,8 +14,11 @@ public class View extends JFrame {
 	private Model model;
 	private Mediator mediator;
 
+	JMenuItem loadPlaces;
+	JMenuItem save;
+
 	private ImagePanel imagePanel;
-	private MenuAndOptions menuAndOptions;
+	private ControlPanel controlPanel;
 	private Categories categories;
 
 	public View() {
@@ -25,9 +29,11 @@ public class View extends JFrame {
 
 		mediator = new Mediator(model, this);
 		this.mediator = mediator;
+		
+		addMenuBar();
 
-		menuAndOptions = new MenuAndOptions(this, mediator);
-		add(menuAndOptions, BorderLayout.NORTH);
+		controlPanel = new ControlPanel(this, mediator);
+		add(controlPanel, BorderLayout.NORTH);
 
 		categories = new Categories(mediator, this);
 		add(categories, BorderLayout.EAST);
@@ -39,6 +45,43 @@ public class View extends JFrame {
 		pack();
 	}
 
+	private void addMenuBar() {
+		
+		JMenuBar menuBar = new JMenuBar();
+		JMenu archive = new JMenu("Archive");
+
+		menuBar.add(archive);
+
+		JMenuItem newMap = new JMenuItem("New Map");
+		newMap.addActionListener(new MapOpener(model));
+
+		loadPlaces = new JMenuItem("Load Places");
+		loadPlaces.addActionListener(new PlaceOpener(model));
+		loadPlaces.setEnabled(false);
+
+		save = new JMenuItem("Save");
+		save.addActionListener(new PlaceSaver(model));
+		save.setEnabled(false);
+
+		JMenuItem exit = new JMenuItem("Exit");
+		exit.addActionListener(event -> System.exit(0));
+
+		archive.add(newMap);
+		archive.add(loadPlaces);
+		archive.add(save);
+		archive.add(exit);
+
+		setJMenuBar(menuBar);
+
+	}
+
+	public void makeMenuItemsEnabled() {
+		
+		loadPlaces.setEnabled(true);
+		save.setEnabled(true);		
+
+	}
+
 	private void instantiateImagePanel() {
 
 		imagePanel = new ImagePanel();
@@ -47,7 +90,7 @@ public class View extends JFrame {
 		
 		add(imageScrollPane, BorderLayout.CENTER);
 		
-		menuAndOptions.makeMenuItemsEnabled();	
+		makeMenuItemsEnabled();	
 	}
 
 	public ImagePanel getImagePanel() {

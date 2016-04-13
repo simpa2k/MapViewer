@@ -7,48 +7,19 @@ import listeners.*;
 import javax.swing.*;
 import java.awt.*;
 
-public class MenuAndOptions extends JPanel {
+public class ControlPanel extends JPanel {
 
 	Mediator mediator;
 	View parentFrame;
 
-	JMenuItem loadPlaces;
-	JMenuItem save;
-
 	JTextField searchField;
 
-	public MenuAndOptions(View parentFrame, Mediator mediator) {
+	public ControlPanel(View parentFrame, Mediator mediator) {
 		
 		this.parentFrame = parentFrame;
 		this.mediator = mediator;
 
 		setLayout(new GridLayout(0, 1));
-
-		JMenuBar menuBar = new JMenuBar();
-		JMenu archive = new JMenu("Archive");
-
-		menuBar.add(archive);
-
-		JMenuItem newMap = new JMenuItem("New Map");
-		newMap.addActionListener(new MapOpener(parentFrame.getModel()));
-
-		loadPlaces = new JMenuItem("Load Places");
-		loadPlaces.addActionListener(new PlaceOpener(parentFrame.getModel()));
-		loadPlaces.setEnabled(false);
-
-		save = new JMenuItem("Save");
-		save.addActionListener(new PlaceSaver(parentFrame.getModel()));
-		save.setEnabled(false);
-
-		JMenuItem exit = new JMenuItem("Exit");
-		exit.addActionListener(event -> System.exit(0));
-
-		archive.add(newMap);
-		archive.add(loadPlaces);
-		archive.add(save);
-		archive.add(exit);
-
-		add(menuBar);
 
 		JPanel optionBar = new JPanel();
 
@@ -83,10 +54,4 @@ public class MenuAndOptions extends JPanel {
 
 	}
 	
-	public void makeMenuItemsEnabled() {
-		
-		loadPlaces.setEnabled(true);
-		save.setEnabled(true);		
-
-	}
 }

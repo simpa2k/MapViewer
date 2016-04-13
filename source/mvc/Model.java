@@ -189,6 +189,8 @@ public class Model {
 		places.put(position, place);
 
 	}
+	
+	public void removeMarkedPlaces() {
 
 		places.entrySet().removeIf(e -> e.getValue().getMarked());
 		placesByName.removeIf(place -> place.getMarked());
