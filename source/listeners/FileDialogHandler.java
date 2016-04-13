@@ -1,5 +1,7 @@
 package listeners;
 
+import mvc.*;
+
 import java.io.File;
 import javax.swing.*;
 import javax.swing.JFileChooser;
@@ -11,6 +13,18 @@ public class FileDialogHandler {
 	
 	private JFileChooser fileChooser = new JFileChooser("../");
 
+	private FileFilter imageFilter = new FileNameExtensionFilter("Images", "jpg", "gif", "png");
+	private FileFilter placesFilter = new FileNameExtensionFilter("Places", "places");
+
+	private Model model;
+	private View window;
+
+	public FileDialogHandler(Model model, View window) {
+
+		this.model = model;
+		this.window = window;
+
+	}
 	private File getFile(int okOrCancel) {
 	
 		if(okOrCancel == JFileChooser.APPROVE_OPTION) {
@@ -22,28 +36,55 @@ public class FileDialogHandler {
 
 	}
 
-	public File openFile(JFrame window, FileFilter fileFilter) {
+	private File openFile() {
 		
-		if(fileFilter != null) {
-
-			fileChooser.setFileFilter(fileFilter);
-			
-		}
-
 		int okOrCancel = fileChooser.showOpenDialog(window);
 		return getFile(okOrCancel);
+
 	}
 
-	public File getSaveFile(JFrame window, FileFilter fileFilter) {
 
-		if(fileFilter != null) {
+	public void openMap() {
 
-			fileChooser.setFileFilter(fileFilter);
+		fileChooser.setFileFilter(imageFilter);
+		File mapFile = openFile();
+
+		if(mapFile != null) {
 			
+			model.setMapFile(mapFile);
+
 		}
+
+	}
+	
+	public void loadPlaces() {
+		
+		fileChooser.setFileFilter(placesFilter);
+		File placesFile = openFile();
+
+		if(placesFile != null) {
+
+			model.loadPlaces(placesFile);
+
+		}
+
+	}
+
+	public void savePlaces() {
+
+		fileChooser.setFileFilter(placesFilter);
 		
 		int okOrCancel = fileChooser.showSaveDialog(window);		
-		return getFile(okOrCancel);
+		File saveFile = getFile(okOrCancel);
+
+		if(saveFile != null) {
+
+			model.savePlaces(saveFile);
+			model.setChanged(false);
+
 		
+		}
+
 	}
+
 }

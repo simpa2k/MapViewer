@@ -47,20 +47,22 @@ public class View extends JFrame {
 
 	private void addMenuBar() {
 		
+		FileDialogHandler fileDialogHandler = new FileDialogHandler(model, this);
+				
 		JMenuBar menuBar = new JMenuBar();
 		JMenu archive = new JMenu("Archive");
 
 		menuBar.add(archive);
 
 		JMenuItem newMap = new JMenuItem("New Map");
-		newMap.addActionListener(new MapOpener(model));
+		newMap.addActionListener(event -> fileDialogHandler.openMap());
 
 		loadPlaces = new JMenuItem("Load Places");
-		loadPlaces.addActionListener(new PlaceOpener(model));
+		loadPlaces.addActionListener(event -> fileDialogHandler.loadPlaces());
 		loadPlaces.setEnabled(false);
 
 		save = new JMenuItem("Save");
-		save.addActionListener(new PlaceSaver(model));
+		save.addActionListener(event -> fileDialogHandler.savePlaces());
 		save.setEnabled(false);
 
 		JMenuItem exit = new JMenuItem("Exit");
