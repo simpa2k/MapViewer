@@ -20,10 +20,6 @@ public class Mediator {
 	private Model model;
 	private View view;
 
-	//Överväg att använda user.dir som argument till FileChooserkonstruktorn
-//	private FileDialogHandler fileDialogHandler = new FileDialogHandler();
-	private FileFilter placesFilter = new FileNameExtensionFilter("Places", "places");
-
 	private NewPlaceListener newPlaceListener;
 	private WhatIsHereListener whatIsHereListener;
 
@@ -33,29 +29,6 @@ public class Mediator {
 		this.view = view;
 
 	}
-
-	public void openPlaces() {
-
-/*		if(view.getImagePanel() == null) {
-
-			JOptionPane.showMessageDialog(view, "No map chosen", "No map", JOptionPane.ERROR_MESSAGE);
-			return;
-		}
-
-		File placesFile = fileDialogHandler.openFile(view, placesFilter);
-		model.loadPlaces(placesFile);
-*/
-	}
-
-	public void savePlaces() {
-		
-/*		File saveFile = fileDialogHandler.getSaveFile(view);
-		if(saveFile != null) {
-
-			model.savePlaces(saveFile.toPath());
-
-		}
-*/	}
 
  	
 	private void setCrosshairCursor(JPanel panel) {

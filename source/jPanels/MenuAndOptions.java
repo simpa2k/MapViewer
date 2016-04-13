@@ -37,7 +37,6 @@ public class MenuAndOptions extends JPanel {
 		loadPlaces.setEnabled(false);
 
 		save = new JMenuItem("Save");
-//		save.addActionListener(event -> mediator.savePlaces());
 		save.addActionListener(new PlaceSaver(parentFrame.getModel()));
 		save.setEnabled(false);
 

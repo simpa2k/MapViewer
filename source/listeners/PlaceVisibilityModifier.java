@@ -35,7 +35,7 @@ public class PlaceVisibilityModifier implements ActionListener, ListSelectionLis
 		}
 
 	}	
-	
+
 	private void setVisibility() {
 		
 		model.getPlaces().forEach((position, place) -> {	
