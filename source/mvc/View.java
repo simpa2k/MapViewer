@@ -14,12 +14,14 @@ public class View extends JFrame {
 	private Model model;
 	private Mediator mediator;
 
-	JMenuItem loadPlaces;
-	JMenuItem save;
+	private JMenuItem loadPlaces;
+	private JMenuItem save;
 
 	private ImagePanel imagePanel;
 	private ControlPanel controlPanel;
 	private Categories categories;
+
+	private ExitListener exitListener; 
 
 	public View() {
 
@@ -30,6 +32,7 @@ public class View extends JFrame {
 		mediator = new Mediator(model, this);
 		this.mediator = mediator;
 		
+		exitListener = new ExitListener(model, this);
 		addMenuBar();
 
 		controlPanel = new ControlPanel(this, mediator);
@@ -37,6 +40,8 @@ public class View extends JFrame {
 
 		categories = new Categories(mediator, this);
 		add(categories, BorderLayout.EAST);
+
+		addWindowListener(exitListener);
 
 		setName("Inlupp2");
 		setLocationRelativeTo(null);
@@ -66,7 +71,7 @@ public class View extends JFrame {
 		save.setEnabled(false);
 
 		JMenuItem exit = new JMenuItem("Exit");
-		exit.addActionListener(new ExitListener(model, this));
+		exit.addActionListener(exitListener);
 
 		archive.add(newMap);
 		archive.add(loadPlaces);

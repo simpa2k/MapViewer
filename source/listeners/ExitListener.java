@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.Component;
 import java.awt.event.*;
 
-public class ExitListener implements ActionListener {
+public class ExitListener extends WindowAdapter implements ActionListener {
 
 	private Model model;
 	private Component eventFiringComponent;
@@ -19,6 +19,18 @@ public class ExitListener implements ActionListener {
 	}
 	
 	public void actionPerformed(ActionEvent e) {
+		
+		checkModelStatus();
+
+	}
+
+	public void windowClosing(WindowEvent e) {
+		
+		checkModelStatus();
+
+	}
+
+	private void checkModelStatus() {
 
 		if(model.getChanged()) {
 
