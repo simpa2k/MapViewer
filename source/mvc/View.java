@@ -40,7 +40,7 @@ public class View extends JFrame {
 
 		setName("Inlupp2");
 		setLocationRelativeTo(null);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 
 		pack();
 	}
@@ -64,7 +64,7 @@ public class View extends JFrame {
 		save.setEnabled(false);
 
 		JMenuItem exit = new JMenuItem("Exit");
-		exit.addActionListener(event -> System.exit(0));
+		exit.addActionListener(new ExitListener(model, this));
 
 		archive.add(newMap);
 		archive.add(loadPlaces);

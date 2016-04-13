@@ -4,10 +4,14 @@ import mvc.Model;
 
 import java.io.File;
 import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.filechooser.*;
+import javax.swing.filechooser.FileFilter;
 
 public class PlaceSaver implements ActionListener {
 
 	private Model model;
+//	private FileFilter placesFilter = new FileNameExtensionFilter("Places", "places");
 
 	public PlaceSaver(Model model) {
 
@@ -19,17 +23,15 @@ public class PlaceSaver implements ActionListener {
 
 		FileDialogHandler fileDialogHandler = new FileDialogHandler();
 		
-		//This dialog should also be provided a FileFilter, really
 		//Displaying some confirmation that the save proceeded successfully
 		//would also be nice
-		File saveFile = fileDialogHandler.getSaveFile(null);	
+		File saveFile = fileDialogHandler.getSaveFile(null, null);	
 
-		if(saveFile != null) {
 
-			model.savePlaces(saveFile.toPath());
+		model.savePlaces(saveFile);
+		model.setChanged(false);
 
-		}
-		
+
 	}
 
 }

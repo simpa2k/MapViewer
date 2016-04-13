@@ -1,17 +1,18 @@
 package listeners;
 
 import java.io.File;
-import javax.swing.JFrame;
+import javax.swing.*;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.*;
 import javax.swing.filechooser.FileFilter;
+import java.awt.*;
 
 public class FileDialogHandler {
 	
-	private final JFileChooser fileChooser = new JFileChooser("../");
+	private JFileChooser fileChooser = new JFileChooser("../");
 
 	private File getFile(int okOrCancel) {
-
+	
 		if(okOrCancel == JFileChooser.APPROVE_OPTION) {
 
 			return fileChooser.getSelectedFile();
@@ -33,10 +34,15 @@ public class FileDialogHandler {
 		return getFile(okOrCancel);
 	}
 
-	public File getSaveFile(JFrame window) {
-		
-		int okOrCancel = fileChooser.showSaveDialog(window);
+	public File getSaveFile(JFrame window, FileFilter fileFilter) {
 
+		if(fileFilter != null) {
+
+			fileChooser.setFileFilter(fileFilter);
+			
+		}
+		
+		int okOrCancel = fileChooser.showSaveDialog(window);		
 		return getFile(okOrCancel);
 		
 	}

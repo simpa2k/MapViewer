@@ -15,9 +15,13 @@ public class Model {
 
 	private File mapFile;
 	private File placesFile;
+	
+	private	Charset charset = Charset.forName("UTF-8");
 
 	private HashMap<Position, Place> places = new HashMap<>();
 	private MultiMap<String, Place> placesByName = new MultiMap<>();
+
+	private boolean changed = false;
 
 	public void setView(View view) {
 
@@ -36,6 +40,18 @@ public class Model {
 	public File getMapFile() {
 
 		return mapFile;
+
+	}
+
+	public void setChanged(boolean changed) {
+		
+		this.changed = changed;
+
+	}
+	
+	public boolean getChanged() {
+
+		return changed;
 
 	}
 
@@ -90,39 +106,36 @@ public class Model {
 	public void loadPlaces(File placesFile) {
 
 	        this.placesFile = placesFile;
-
-		try {
+		
+		try(BufferedReader reader = Files.newBufferedReader(placesFile.toPath(), charset)) {
 			
-			Scanner scanner = new Scanner(placesFile);
+			String line;
 
-			while(scanner.hasNextLine()) {
+			while( (line = reader.readLine()) != null) {
 
-				String line = scanner.nextLine();
 				String[] properties = line.split(",");
 				
 				parsePlaceLine(properties);
 					
 			}
 
-		} catch(FileNotFoundException e) {
+		} catch(IOException e) {
 
 			System.out.println("Places file not found.");
 
-		}
+		} 
 
 		view.updatePlaces();
 
 	}
 
-	public void savePlaces(Path pathToSaveFile) {
+	public void savePlaces(File saveFile) {
 		
 		if(places != null) {
 			
-			Charset charset = Charset.forName("UTF-8");
-			
 			places.forEach( (position, place) -> {		
 				
-				try(BufferedWriter writer = Files.newBufferedWriter(pathToSaveFile, charset, StandardOpenOption.APPEND)) {
+				try(BufferedWriter writer = Files.newBufferedWriter(saveFile.toPath(), charset, StandardOpenOption.APPEND)) {
 
 					writer.write(place.toString(), 0, place.toString().length());
 					writer.newLine();
@@ -194,6 +207,8 @@ public class Model {
 
 		places.entrySet().removeIf(e -> e.getValue().getMarked());
 		placesByName.removeIf(place -> place.getMarked());
+
+		setChanged(true);
 
 	}
 

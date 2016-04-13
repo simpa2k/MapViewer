@@ -1,7 +1,4 @@
 *Use window events (window listener/window adapter) to display dialog when user tries to close window without having
  saved data. Remember to change defaultCloseOperation to DO_NOTHING_ON_CLOSE.
 
-*Use boolean variable to detect whether data has been changed or not.
-
-*Add JMenuBar to JFrame instead of JPanel. Use setJMenuBar.
-
+*Try and see if the accessdeniedexceptions and nosuchfileexceptions that gets thrown from the fileshooser can be caught 

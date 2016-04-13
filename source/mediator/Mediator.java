@@ -106,6 +106,7 @@ public class Mediator {
 			String selectedCategory = view.getSelectedCategory();
 
 			model.createPlace(selectedCategory, xPosition, yPosition, name, description);
+			model.setChanged(true);
 
 			//Det här är inte världens snyggate lösning
 			view.drawPlace(new Position(xPosition, yPosition));
