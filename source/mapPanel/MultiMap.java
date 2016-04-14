@@ -30,13 +30,19 @@ public class MultiMap<K, V> {
 
 	}
 
-	/*public void remove(K key, V value) {
+	public void remove(K key, V value) {
 
 		HashSet<V> values = map.get(key);
 
 		values.remove(value);
 
-	}*/
+		if(values.isEmpty()) {
+			
+			map.remove(key);
+
+		}
+
+	}
 
 	public void removeIf(Predicate<V> predicate) {
 
@@ -71,6 +77,21 @@ public class MultiMap<K, V> {
 	public boolean isEmpty() {
 
 		return map.isEmpty();
+
+	}
+
+	@Override
+	public String toString() {
+		
+		String string = "";
+
+		for(K key : map.keySet()) {
+
+			string += key + ": " + map.get(key) + "\n";
+
+		}
+
+		return string;
 
 	}
 

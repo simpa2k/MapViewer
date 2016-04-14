@@ -206,9 +206,22 @@ public class MapModel {
 	}
 	
 	public void removeMarkedPlaces() {
+		
+		places.forEach((position, place) -> {
+			
+			if(place.getMarked()) {
 
-		places.entrySet().removeIf(e -> e.getValue().getMarked());
-		placesByName.removeIf(place -> place.getMarked());
+				if(place instanceof NamedPlace) {
+
+					String name = ((NamedPlace)place).getName();
+					placesByName.remove(name, place);
+
+				}
+				places.remove(place);
+
+			}
+
+		});
 
 		changed = true;
 
