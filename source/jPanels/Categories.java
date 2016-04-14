@@ -3,7 +3,7 @@ package jPanels;
 import mvc.*;
 import mediator.Mediator;
 import places.Place;
-import listeners.PlaceVisibilityModifier;
+import listeners.VisibilityByCategorySetter;
 
 import javax.swing.*;
 import java.awt.*;
@@ -36,11 +36,11 @@ public class Categories extends JPanel {
 		//The current layout managers don't allow setVisibleRowCount(). The assignment pictures suggest
 		//that might be bad.
 		categoryList.setSelectedIndex(0);
-		categoryList.addListSelectionListener(new PlaceVisibilityModifier(parentFrame.getModel(), matchesSelectedCategory(), true));
+		categoryList.addListSelectionListener(new VisibilityByCategorySetter(parentFrame.getModel(), categoryList, true));
 		centerPanel.add(categoryList, BorderLayout.CENTER);
 
 		JButton hideCategory = new JButton("Hide category");
-		hideCategory.addActionListener(new PlaceVisibilityModifier(parentFrame.getModel(), matchesSelectedCategory(), false)); 
+		hideCategory.addActionListener(new VisibilityByCategorySetter(parentFrame.getModel(), categoryList, false)); 
 		centerPanel.add(hideCategory, BorderLayout.SOUTH);
 
 		c.gridx = 0;
@@ -53,12 +53,6 @@ public class Categories extends JPanel {
 	public String getSelectedCategory() {
 
 		return categoryList.getSelectedValue();
-
-	}
-
-	private Predicate<Place> matchesSelectedCategory() {
-		
-		return place -> place.getCategory().equals(getSelectedCategory());
 
 	}
 

@@ -20,6 +20,7 @@ public class MapModel {
 
 	private HashMap<Position, Place> places = new HashMap<>();
 	private MultiMap<String, Place> placesByName = new MultiMap<>();
+	private MultiMap<String, Place> placesByCategory = new MultiMap<>();
 
 	private boolean changed = false;
 
@@ -73,7 +74,10 @@ public class MapModel {
 		}
 		
 		place.addMouseListener(new ExistingPlaceListener(place));
+
 		places.put(place.getPosition(), place);
+		placesByCategory.put(place.getCategory(), place);
+
 		view.drawPlace(place);
 	}
 
@@ -199,16 +203,38 @@ public class MapModel {
 
 	}
 
+	public HashSet<Place> getPlacesByCategory(String category) {
+		
+		return placesByCategory.get(category);
+
+	}
+
 	public void putPlace(Position position, Place place) {
 
 		places.put(position, place);
 
 	}
-	
+
 	public void removeMarkedPlaces() {
 
-		places.entrySet().removeIf(e -> e.getValue().getMarked());
-		placesByName.removeIf(place -> place.getMarked());
+		places.forEach((position, place) -> {
+
+			if(place.getMarked()) {
+				
+				String category = place.getCategory();
+				placesByCategory.remove(category, place);
+
+				if(place instanceof NamedPlace) {
+
+					String name = place.getName();
+					placesByName.remove(name, place);
+
+				}
+				places.remove(place);
+
+			}
+
+		});
 
 		changed = true;
 

@@ -39,7 +39,7 @@ public class ControlPanel extends JPanel {
 		optionBar.add(searchButton);
 
 		JButton hideButton = new JButton("Hide");
-		hideButton.addActionListener(new PlaceVisibilityModifier(parentFrame.getModel(), (place -> place.getMarked()), false));
+		hideButton.addActionListener(new VisibilityByMarkedSetter(parentFrame.getModel()));
 		optionBar.add(hideButton);
 
 		JButton removeButton = new JButton("Remove");

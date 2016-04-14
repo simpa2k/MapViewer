@@ -30,48 +30,67 @@ public class MultiMap<K, V> {
 
 	}
 
-	/*public void remove(K key, V value) {
-
+	public void remove(K key, V value) {
+		
 		HashSet<V> values = map.get(key);
-
+		
 		values.remove(value);
 
-	}*/
+		if(values.isEmpty()) {
 
-	public void removeIf(Predicate<V> predicate) {
+			map.remove(key);
 
-		Iterator<K> mapIterator = map.keySet().iterator();
-
-		while(mapIterator.hasNext()) {
-
-			HashSet<V> values = map.get(mapIterator.next());
-			Iterator<V> setIterator = values.iterator();
-
-			while(setIterator.hasNext()) {
-
-				V nextItem = setIterator.next();
-
-				if(predicate.test(nextItem)) {
-
-					setIterator.remove();
-
-					if(values.isEmpty()) {
-
-						mapIterator.remove();
-
-					}
-
-				}
-
-			}
 		}
 
 	}
+
+//	public void removeIf(Predicate<V> predicate) {
+//
+//		Iterator<K> mapIterator = map.keySet().iterator();
+//
+//		while(mapIterator.hasNext()) {
+//
+//			HashSet<V> values = map.get(mapIterator.next());
+//			Iterator<V> setIterator = values.iterator();
+//
+//			while(setIterator.hasNext()) {
+//
+//				V nextItem = setIterator.next();
+//
+//				if(predicate.test(nextItem)) {
+//
+//					setIterator.remove();
+//
+//					if(values.isEmpty()) {
+//
+//						mapIterator.remove();
+//
+//					}
+//
+//				}
+//
+//			}
+//		}
+//
+//	}
 
 	public boolean isEmpty() {
 
 		return map.isEmpty();
 
+	}
+
+	public String toString() {
+		
+		String string = "";
+
+		for(K key : map.keySet()) {
+
+			string += key + ": " + map.get(key) + "\n";
+
+		}
+		
+		return string;
 	}
 
 }
