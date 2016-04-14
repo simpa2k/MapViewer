@@ -12,8 +12,8 @@ public abstract class Place extends JComponent {
 	private boolean marked = false;
 	private boolean foldedOut = false;
 
-	Triangle triangle;
-	Rectangle border; //Might it be better to actually use Border?
+	private Triangle triangle;
+	private Rectangle border; //Might it be better to actually use Border?
 
 
 	public Place(String category, Position position) {
@@ -73,8 +73,6 @@ public abstract class Place extends JComponent {
 
 		setVisible(true);
 		setMarked(true);
-
-		repaint();
 
 	}
 

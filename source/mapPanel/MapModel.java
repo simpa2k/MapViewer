@@ -1,6 +1,5 @@
 package mapPanel;
 
-import mvc.View;
 import places.*;
 import listeners.ExistingPlaceListener;
 
@@ -24,7 +23,7 @@ public class MapModel {
 
 	private boolean changed = false;
 
-	public void setView(MapPanel view) {
+	protected void setView(MapPanel view) {
 
 		this.view = view;
 
@@ -44,12 +43,6 @@ public class MapModel {
 
 	}
 
-	public void setChanged(boolean changed) {
-		
-		this.changed = changed;
-
-	}
-	
 	public boolean getChanged() {
 
 		return changed;
@@ -131,9 +124,8 @@ public class MapModel {
 
 	public void addPlace(String selectedCategory, int xPosition, int yPosition, String name, String description) {
 		
-		setChanged(true);
 		createPlace(selectedCategory, xPosition, yPosition, name, description);
-
+		changed = true;
 	}
 
 	public void savePlaces(File saveFile) {
@@ -154,7 +146,8 @@ public class MapModel {
 				}	
 			});
 
-			setChanged(false);
+			changed = false;
+
 		}
 	}
 
@@ -217,7 +210,7 @@ public class MapModel {
 		places.entrySet().removeIf(e -> e.getValue().getMarked());
 		placesByName.removeIf(place -> place.getMarked());
 
-		setChanged(true);
+		changed = true;
 
 	}
 
