@@ -14,14 +14,13 @@ public class View extends JFrame {
 	private Model model;
 	private Mediator mediator;
 
+	private ExitListener exitListener; 
 	private JMenuItem loadPlaces;
 	private JMenuItem save;
 
 	private ImagePanel imagePanel;
 	private ControlPanel controlPanel;
 	private Categories categories;
-
-	private ExitListener exitListener; 
 
 	public View() {
 

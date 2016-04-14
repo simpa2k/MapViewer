@@ -29,7 +29,6 @@ public class Mediator {
 		this.view = view;
 
 	}
-
  	
 	private void setCrosshairCursor(JPanel panel) {
 
