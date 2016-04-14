@@ -12,7 +12,7 @@ public abstract class Place extends JComponent {
 	private boolean marked = false;
 	private boolean foldedOut = false;
 
-	private Triangle triangle;
+	private Polygon triangle;
 	private Rectangle border; //Might it be better to actually use Border?
 
 
@@ -23,14 +23,25 @@ public abstract class Place extends JComponent {
 
 		setBounds(position.getX() - 10, position.getY() - 20, 20, 20);
 
-		triangle = new Triangle(getWidth(), getHeight(), resolveColor());
+		triangle = createTriangle(); 
 		border = new Rectangle(new Dimension(getWidth(), getHeight()));
+
+	}
+	
+	private Polygon createTriangle() {
+
+		int[] xPoints = {getWidth() / 2, 0, getWidth()};
+		int[] yPoints = {getHeight(), 0, 0};
+		int nPoints = 3;
+
+		return new Polygon(xPoints, yPoints, nPoints);
+
 
 	}
 	
 	protected int getTriangleWidth() {
 
-		return triangle.getWidth();
+		return (int) triangle.getBounds().getWidth();
 
 	}
 
@@ -116,8 +127,9 @@ public abstract class Place extends JComponent {
 		
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
-
-		add(triangle);
+		
+		g2d.setColor(resolveColor());
+		g2d.fill(triangle);;
 
 		if(marked) {
 

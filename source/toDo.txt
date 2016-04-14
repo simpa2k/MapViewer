@@ -1,6 +1,3 @@
-*Use window events (window listener/window adapter) to display dialog when user tries to close window without having
- saved data. Remember to change defaultCloseOperation to DO_NOTHING_ON_CLOSE.
-
 *Try and see if the accessdeniedexceptions and nosuchfileexceptions that gets thrown from the fileshooser can be caught 
 
 *Use focus events to keep track of a place's marked status
