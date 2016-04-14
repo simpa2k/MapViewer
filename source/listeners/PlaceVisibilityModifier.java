@@ -1,6 +1,6 @@
 package listeners;
 
-import mvc.Model;
+import mapPanel.MapModel;
 import places.Place;
 
 import java.awt.event.*;
@@ -9,13 +9,13 @@ import java.util.function.*;
 
 public class PlaceVisibilityModifier implements ActionListener, ListSelectionListener {
 	
-	private Model model; 
+	private MapModel mapModel; 
 	private Predicate<Place> predicate;
 	boolean visible;
 
-	public PlaceVisibilityModifier(Model model, Predicate<Place> predicate, boolean visible) {
+	public PlaceVisibilityModifier(MapModel mapModel, Predicate<Place> predicate, boolean visible) {
 
-		this.model = model;
+		this.mapModel = mapModel;
 		this.predicate = predicate;
 		this.visible = visible;
 	}
@@ -38,7 +38,7 @@ public class PlaceVisibilityModifier implements ActionListener, ListSelectionLis
 
 	private void setVisibility() {
 		
-		model.getPlaces().forEach((position, place) -> {	
+		mapModel.getPlaces().forEach((position, place) -> {	
 	
 			if(predicate.test(place)) {
 

@@ -1,33 +1,34 @@
 package listeners;
 
+import mapPanel.MapModel;
 import mvc.*;
 import java.awt.event.*;
 
 public class PlaceRemover implements ActionListener {
 
-	private Model model;
+	private MapModel mapModel;
 	private View view;
 
-	public PlaceRemover(Model model, View view) {
+	public PlaceRemover(MapModel mapModel, View view) {
 
-		this.model = model;
+		this.mapModel = mapModel;
 		this.view = view;
 
 	}
 
 	public void actionPerformed(ActionEvent e) {
 
-		model.getPlaces().forEach( (position, place) -> {
+		mapModel.getPlaces().forEach( (position, place) -> {
 
 			if(place.getMarked()) {
 
-				view.getImagePanel().remove(place);
+				view.getMapPanel().remove(place);
 
 			}
 
 		});
 
-		model.removeMarkedPlaces();
+		mapModel.removeMarkedPlaces();
 
 		view.revalidate();
 		view.repaint();

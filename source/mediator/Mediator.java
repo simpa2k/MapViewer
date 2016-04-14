@@ -1,7 +1,7 @@
 package mediator;
 
-import mvc.*;
-import jPanels.ImagePanel;
+import mapPanel.*;
+import mvc.View;
 import places.*;
 import listeners.*;
 
@@ -17,15 +17,15 @@ import javax.swing.filechooser.FileFilter;
 
 public class Mediator {
 
-	private Model model;
+	private MapModel mapModel;
 	private View view;
 
 	private NewPlaceListener newPlaceListener;
 	private WhatIsHereListener whatIsHereListener;
 
-	public Mediator(Model model, View view) {
+	public Mediator(MapModel mapModel, View view) {
 
-		this.model = model;
+		this.mapModel = mapModel;
 		this.view = view;
 
 	}
@@ -45,7 +45,7 @@ public class Mediator {
 	//Se över namngivningen här - båda de två nedanstående lägger till lyssnare på kartan
 	public void addMapListener(String selectedType) {
 
-		ImagePanel mapPanel = view.getImagePanel();
+		MapPanel mapPanel = view.getMapPanel();
 
 		if( (mapPanel != null) && (mapPanel.getMouseListeners().length == 0) ) {
 
@@ -60,7 +60,7 @@ public class Mediator {
 	
 	public void removeMapListener() {
 
-		ImagePanel mapPanel = view.getImagePanel();
+		MapPanel mapPanel = view.getMapPanel();
 
 		setDefaultCursor(mapPanel);
 		mapPanel.removeMouseListener(newPlaceListener);
@@ -69,13 +69,13 @@ public class Mediator {
 
 	public void addWhatIsHereListener() {
 
-		ImagePanel mapPanel = view.getImagePanel();
+		MapPanel mapPanel = view.getMapPanel();
 
 		if( (mapPanel != null) && (mapPanel.getMouseListeners().length == 0) ){
 			
 			setCrosshairCursor(mapPanel);
 
-			whatIsHereListener = new WhatIsHereListener(model, this);
+			whatIsHereListener = new WhatIsHereListener(mapModel, this);
 			mapPanel.addMouseListener(whatIsHereListener);
 
 		}
@@ -84,7 +84,7 @@ public class Mediator {
 
 	public void removeWhatIsHereListener() {
 
-		ImagePanel mapPanel = view.getImagePanel();
+		MapPanel mapPanel = view.getMapPanel();
 
 		if(mapPanel != null) {
 
@@ -97,22 +97,13 @@ public class Mediator {
 
 	public void createPlace(int xPosition, int yPosition, String name, String description) {
 
-		ImagePanel mapPanel = view.getImagePanel();
+//			String type = description == null ? "Named" : "Described";
+		String selectedCategory = view.getSelectedCategory();
 
-		if(mapPanel != null) {
+		mapModel.addPlace(selectedCategory, xPosition, yPosition, name, description);
+		
+		removeMapListener();
 
-			String type = description == null ? "Named" : "Described";
-			String selectedCategory = view.getSelectedCategory();
-
-			model.createPlace(selectedCategory, xPosition, yPosition, name, description);
-			model.setChanged(true);
-
-			//Det här är inte världens snyggate lösning
-			view.drawPlace(new Position(xPosition, yPosition));
-			
-			removeMapListener();
-
-		}
 
 	}
 

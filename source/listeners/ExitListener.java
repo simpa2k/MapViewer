@@ -1,6 +1,6 @@
 package listeners;
 
-import mvc.Model;
+import mapPanel.MapModel;
 
 import javax.swing.*;
 import java.awt.Component;
@@ -8,12 +8,12 @@ import java.awt.event.*;
 
 public class ExitListener extends WindowAdapter implements ActionListener {
 
-	private Model model;
+	private MapModel mapModel;
 	private Component eventFiringComponent;
 
-	public ExitListener(Model model, Component eventFiringComponent) {
+	public ExitListener(MapModel mapModel, Component eventFiringComponent) {
 
-		this.model = model;
+		this.mapModel = mapModel;
 		this.eventFiringComponent = eventFiringComponent;
 
 	}
@@ -32,7 +32,7 @@ public class ExitListener extends WindowAdapter implements ActionListener {
 
 	private void checkModelStatus() {
 
-		if(model.getChanged()) {
+		if(mapModel.getChanged()) {
 
 			int okOrCancel = JOptionPane.showConfirmDialog(eventFiringComponent, "You have unsaved changes, exit anyway?",
 								       "Unsaved changes", JOptionPane.OK_CANCEL_OPTION);

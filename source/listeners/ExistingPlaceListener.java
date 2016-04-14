@@ -2,7 +2,6 @@ package listeners;
 
 import mediator.Mediator;
 import places.*;
-import jPanels.ImagePanel;
 
 import javax.swing.*;
 import java.awt.event.*;

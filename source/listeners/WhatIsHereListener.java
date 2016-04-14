@@ -1,19 +1,19 @@
 package listeners;
 
 import mediator.Mediator;
-import mvc.Model;
+import mapPanel.MapModel;
 import places.*;
 
 import java.awt.event.*;
 
 public class WhatIsHereListener extends MouseAdapter {
 
-	Model model;
-	Mediator mediator;
+	private MapModel mapModel;
+	private	Mediator mediator;
 
-	public WhatIsHereListener(Model model, Mediator mediator) {
+	public WhatIsHereListener(MapModel mapModel, Mediator mediator) {
 
-		this.model = model;
+		this.mapModel = mapModel;
 		this.mediator = mediator;
 
 	}
@@ -22,12 +22,10 @@ public class WhatIsHereListener extends MouseAdapter {
 	public void mouseClicked(MouseEvent e) {
 
 		Position clickedPosition = new Position(e.getX(), e.getY());
-		System.out.println("x: " + e.getX()  + " y: " + e.getY());
-		Place place = model.searchAreaAroundPosition(clickedPosition);
+		Place place = mapModel.searchAreaAroundPosition(clickedPosition);
 
 		if(place != null) {
 
-			System.out.println("Hit!");
 			place.setVisible(true);
 			place.repaint();
 

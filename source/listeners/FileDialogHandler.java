@@ -1,6 +1,7 @@
 package listeners;
 
-import mvc.*;
+import mapPanel.MapModel;
+import mvc.View;
 
 import java.io.File;
 import javax.swing.*;
@@ -16,12 +17,12 @@ public class FileDialogHandler {
 	private FileFilter imageFilter = new FileNameExtensionFilter("Images", "jpg", "gif", "png");
 	private FileFilter placesFilter = new FileNameExtensionFilter("Places", "places");
 
-	private Model model;
+	private MapModel mapModel;
 	private View window;
 
-	public FileDialogHandler(Model model, View window) {
+	public FileDialogHandler(MapModel mapModel, View window) {
 
-		this.model = model;
+		this.mapModel = mapModel;
 		this.window = window;
 
 	}
@@ -51,7 +52,11 @@ public class FileDialogHandler {
 
 		if(mapFile != null) {
 			
-			model.setMapFile(mapFile);
+			mapModel.setMapFile(mapFile);
+
+			window.pack();
+			window.validate();
+			window.makeMenuItemsEnabled();
 
 		}
 
@@ -64,7 +69,7 @@ public class FileDialogHandler {
 
 		if(placesFile != null) {
 
-			model.loadPlaces(placesFile);
+			mapModel.loadPlaces(placesFile);
 
 		}
 
@@ -79,8 +84,8 @@ public class FileDialogHandler {
 
 		if(saveFile != null) {
 
-			model.savePlaces(saveFile);
-			model.setChanged(false);
+			mapModel.savePlaces(saveFile);
+//			mapModel.setChanged(false);
 
 		
 		}

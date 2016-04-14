@@ -1,6 +1,7 @@
 package listeners;
 
-import mvc.*;
+import mapPanel.MapModel;
+import mvc.View;
 
 import places.Place;
 import java.awt.event.*;
@@ -9,19 +10,19 @@ import javax.swing.*;
 
 public class NameSearcher implements ActionListener {
 
-	private Model model;
+	private MapModel mapModel;
 	private JTextField searchField;
 
-	public NameSearcher(Model model, JTextField searchField) {
+	public NameSearcher(MapModel mapModel, JTextField searchField) {
 
-		this.model = model;
+		this.mapModel = mapModel;
 		this.searchField = searchField;
 
 	}
 
 	public void actionPerformed(ActionEvent e) {
 	
-		HashSet<Place> placesByName = model.getPlacesByName(searchField.getText());
+		HashSet<Place> placesByName = mapModel.getPlacesByName(searchField.getText());
 
 		if(placesByName != null) {
 

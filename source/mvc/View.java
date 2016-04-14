@@ -1,5 +1,6 @@
 package mvc;
 
+import mapPanel.*;
 import mediator.Mediator;
 import places.*;
 import listeners.*;
@@ -11,27 +12,27 @@ import java.io.*;
 
 public class View extends JFrame {
 
-	private Model model;
+	private MapModel mapModel;
+	private MapPanel mapPanel;
+	
 	private Mediator mediator;
 
 	private ExitListener exitListener; 
 	private JMenuItem loadPlaces;
 	private JMenuItem save;
 
-	private ImagePanel imagePanel;
+	
 	private ControlPanel controlPanel;
 	private Categories categories;
 
 	public View() {
 
-		model = new Model();
-		this.model = model;
-		model.setView(this);
+		addMapPanel();
 
-		mediator = new Mediator(model, this);
+		mediator = new Mediator(mapModel, this);
 		this.mediator = mediator;
 		
-		exitListener = new ExitListener(model, this);
+		exitListener = new ExitListener(mapModel, this);
 		addMenuBar();
 
 		controlPanel = new ControlPanel(this, mediator);
@@ -49,9 +50,22 @@ public class View extends JFrame {
 		pack();
 	}
 
+	private void addMapPanel() {
+
+		mapModel = new MapModel();
+		mapPanel = new MapPanel(mapModel);
+
+		JScrollPane mapScrollPane = new JScrollPane(mapPanel);
+		mapScrollPane.setBorder(null);
+		
+		add(mapScrollPane, BorderLayout.CENTER);
+		
+//		makeMenuItemsEnabled();	
+	}
+
 	private void addMenuBar() {
 		
-		FileDialogHandler fileDialogHandler = new FileDialogHandler(model, this);
+		FileDialogHandler fileDialogHandler = new FileDialogHandler(mapModel, this);
 				
 		JMenuBar menuBar = new JMenuBar();
 		JMenu archive = new JMenu("Archive");
@@ -88,51 +102,17 @@ public class View extends JFrame {
 
 	}
 
-	private void instantiateImagePanel() {
 
-		imagePanel = new ImagePanel();
-		JScrollPane imageScrollPane = new JScrollPane(imagePanel);
-		imageScrollPane.setBorder(null);
-		
-		add(imageScrollPane, BorderLayout.CENTER);
-		
-		makeMenuItemsEnabled();	
-	}
+	public MapPanel getMapPanel() {
 
-	public ImagePanel getImagePanel() {
-
-		return imagePanel;
-
-	}
-
-	public void updateMap() {
-
-		if(imagePanel == null) {
-
-			instantiateImagePanel();
-
-		}
-
-		imagePanel.setMap(model.getMapFile());
-		
-		pack();
-		validate();
-		repaint();
-
-	}
-
-	public void updatePlaces() {
-
-		imagePanel.drawPlaces(model.getPlaces());
-
-		repaint();
+		return mapPanel;
 
 	}
 
 	public void drawPlace(Position position) {
 
-		imagePanel.drawPlace(model.getPlace(position));
-		imagePanel.repaint();
+		mapPanel.drawPlace(mapModel.getPlace(position));
+		mapPanel.repaint();
 
 	}
 
@@ -142,9 +122,9 @@ public class View extends JFrame {
 
 	}
 
-	public Model getModel() {
+	public MapModel getModel() {
 		
-		return model;
+		return mapModel;
 
 	}
 

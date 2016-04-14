@@ -1,7 +1,7 @@
 package listeners;
 
 import mediator.Mediator;
-import jPanels.ImagePanel;
+import mapPanel.MapPanel;
 import dialogs.*;
 
 import java.awt.event.*;
@@ -10,13 +10,13 @@ import javax.swing.*;
 public class NewPlaceListener extends MouseAdapter {
 
 	private Mediator mediator;
-	private ImagePanel mapView;
+	private MapPanel mapPanel;
 	private String selectedType;
 
-	public NewPlaceListener(Mediator mediator, ImagePanel mapView, String selectedType) {
+	public NewPlaceListener(Mediator mediator, MapPanel mapPanel, String selectedType) {
 
 		this.mediator = mediator;
-		this.mapView = mapView;
+		this.mapPanel = mapPanel;
 		this.selectedType = selectedType;
 
 	}
@@ -55,12 +55,13 @@ public class NewPlaceListener extends MouseAdapter {
 
 		NamedPlaceDialog placeDialog = determineDialog();
 
-		int okOrCancel = JOptionPane.showOptionDialog(mapView, 
-													   placeDialog, 
-													   "New " + selectedType + " place", 
-													   JOptionPane.OK_CANCEL_OPTION, 
-													   JOptionPane.QUESTION_MESSAGE, 
-													   null, null, null);
+		int okOrCancel = JOptionPane.showOptionDialog(mapPanel, 
+							placeDialog, 
+							"New " + selectedType + " place", 
+							JOptionPane.OK_CANCEL_OPTION, 
+							JOptionPane.QUESTION_MESSAGE, 
+							null, null, null);
+
 		if(okOrCancel == JOptionPane.OK_OPTION) {
 
 			getInput(e, placeDialog);

@@ -1,4 +1,4 @@
-package jPanels;
+package mapPanel;
 
 import places.*;
 
@@ -10,12 +10,15 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
-public class ImagePanel extends JPanel {
-      
+public class MapPanel extends JPanel {
+     	
+       	private MapModel model;	
 	private Image image;
 	
-	public ImagePanel() {
+	public MapPanel(MapModel model) {
 
+		this.model = model;
+		model.setView(this);
 		setLayout(null);
 
 	}
@@ -33,30 +36,24 @@ public class ImagePanel extends JPanel {
 		}
 
 		this.setPreferredSize(new Dimension(image.getWidth(this), image.getHeight(this)));
-		
+		repaint();		
 	}
 
 	protected void paintComponent(Graphics g) {
 
 		super.paintComponent(g);
 
-		g.drawImage(image, 0, 0, image.getWidth(this), image.getHeight(this), this);
+		if(image != null) {
+	
+			g.drawImage(image, 0, 0, image.getWidth(this), image.getHeight(this), this);
 
-	}
-
-	public void drawPlaces(HashMap<Position, Place> places) {
-
-		places.forEach( (position, place) -> {
-
-			add(place);
-
-		});
-
+		}
 	}
 
 	public void drawPlace(Place place) {
 
 		add(place); 
+		repaint();
 
 	}
 

@@ -1,4 +1,4 @@
-package mvc;
+package mapPanel;
 
 import places.*;
 import java.util.*;

@@ -1,5 +1,6 @@
-package mvc;
+package mapPanel;
 
+import mvc.View;
 import places.*;
 import listeners.ExistingPlaceListener;
 
@@ -9,9 +10,9 @@ import java.nio.file.*;
 import java.nio.charset.Charset;
 import java.util.*;
 
-public class Model {
+public class MapModel {
 
-	private View view;
+	private MapPanel view;
 
 	private File mapFile;
 	private File placesFile;
@@ -23,7 +24,7 @@ public class Model {
 
 	private boolean changed = false;
 
-	public void setView(View view) {
+	public void setView(MapPanel view) {
 
 		this.view = view;
 
@@ -33,7 +34,7 @@ public class Model {
 
 		this.mapFile = mapFile;
 
-		view.updateMap();
+		view.setMap(mapFile);
 
 	}
 
@@ -57,29 +58,30 @@ public class Model {
 
 	public void createPlace(String category, int xPosition, int yPosition, String name, String description) {
 
+		Place place;
+
 		if(description == null) {
 			
-			NamedPlace namedPlace = new NamedPlace(category, 
-							       new Position(xPosition, yPosition), 
-							       name);
+			place = new NamedPlace(category, 
+					new Position(xPosition, yPosition), 
+					name);
 
-			namedPlace.addMouseListener(new ExistingPlaceListener(namedPlace));
-			places.put(namedPlace.getPosition(), namedPlace);
-			placesByName.put(namedPlace.getName(), namedPlace);
+			placesByName.put(place.getName(), place);
 
 		} else {
 
-			DescribedPlace describedPlace = new DescribedPlace(category, 
-									   new Position(xPosition, yPosition), 
-									   name,
-									   description);
-			System.out.println(describedPlace.getCategory());
-			describedPlace.addMouseListener(new ExistingPlaceListener(describedPlace));
-			places.put(describedPlace.getPosition(), describedPlace);
-			placesByName.put(describedPlace.getName(), describedPlace);
+			place = new DescribedPlace(category, 
+						new Position(xPosition, yPosition), 
+						name,
+						description);
+
+			placesByName.put(place.getName(), place);
 			
 		}
-
+		
+		place.addMouseListener(new ExistingPlaceListener(place));
+		places.put(place.getPosition(), place);
+		view.drawPlace(place);
 	}
 
 	private void parsePlaceLine(String[] properties) {
@@ -111,7 +113,7 @@ public class Model {
 			
 			String line;
 
-			while( (line = reader.readLine()) != null) {
+			while( (line = reader.readLine()) != null ) {
 
 				String[] properties = line.split(",");
 				
@@ -125,7 +127,12 @@ public class Model {
 
 		} 
 
-		view.updatePlaces();
+	}
+
+	public void addPlace(String selectedCategory, int xPosition, int yPosition, String name, String description) {
+		
+		setChanged(true);
+		createPlace(selectedCategory, xPosition, yPosition, name, description);
 
 	}
 
@@ -146,6 +153,8 @@ public class Model {
 
 				}	
 			});
+
+			setChanged(false);
 		}
 	}
 
