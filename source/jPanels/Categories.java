@@ -14,7 +14,7 @@ public class Categories extends JPanel {
 	
 	//Should these be generated dynamically from the actual places?
 	//A list model will have to be used.
-	String[] categories = {"Buss", "Tunnelbana", "Tåg"};
+	String[] categories = {" ","Buss", "Tunnelbana", "Tåg"};
 	private JList<String> categoryList; 
 
 	public Categories(Mediator mediator, View parentFrame) {
@@ -35,6 +35,7 @@ public class Categories extends JPanel {
 		//Also check if it should be possible to select multiple values, or if one is sufficient.
 		//The current layout managers don't allow setVisibleRowCount(). The assignment pictures suggest
 		//that might be bad.
+		categoryList.setSelectedIndex(0);
 		categoryList.addListSelectionListener(new PlaceVisibilityModifier(parentFrame.getModel(), matchesSelectedCategory(), true));
 		centerPanel.add(categoryList, BorderLayout.CENTER);
 
