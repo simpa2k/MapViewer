@@ -27,7 +27,7 @@ public class ControlPanel extends JPanel {
 		optionBar.add(createNew);
 
 		String[] typesOfPlaces = {"Named", "Described"};
-		JComboBox namedOrDescribed = new JComboBox(typesOfPlaces);
+		JComboBox<String> namedOrDescribed = new JComboBox<>(typesOfPlaces);
 		namedOrDescribed.addActionListener(event -> mediator.addMapListener(typesOfPlaces[namedOrDescribed.getSelectedIndex()]));
 		optionBar.add(namedOrDescribed);
 
