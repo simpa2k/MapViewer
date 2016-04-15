@@ -2,11 +2,13 @@ package dialogs;
 
 import javax.swing.*;
 
-public class NamedPlaceDialog extends JPanel {
+public class NamedPlaceDialog extends PlaceDialog {
 
 	private JTextField nameInput;
 
-	public NamedPlaceDialog() {
+	public NamedPlaceDialog(String category, Position position) {
+		
+		super(category, position);
 
 		JLabel name = new JLabel("Name:");
 		add(name);
@@ -16,9 +18,16 @@ public class NamedPlaceDialog extends JPanel {
 
 	}
 
-	public String getNameInput() {
+	protected String getNameInput() {
 
 		return nameInput.getText();
+
+	}
+
+	@Override
+	public NamedPlace getPlace() {
+
+		return new NamedPlace(getCategory(), getPosition(), getNameInput());	
 
 	}
 

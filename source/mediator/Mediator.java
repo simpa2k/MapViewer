@@ -51,7 +51,7 @@ public class Mediator {
 
 			setCrosshairCursor(mapPanel);
 			
-			newPlaceListener = new NewPlaceListener(this, mapPanel, selectedType);
+			newPlaceListener = new NewPlaceListener(this, mapPanel, selectedType, view.getSelectedCategory());
 			mapPanel.addMouseListener(newPlaceListener);
 
 		}

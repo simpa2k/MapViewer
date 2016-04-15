@@ -6,7 +6,9 @@ public class DescribedPlaceDialog extends NamedPlaceDialog {
 
 	JTextField descriptionInput;
 
-	public DescribedPlaceDialog() {
+	public DescribedPlaceDialog(String category, Position position) {
+
+		super(category, position);
 
 		JLabel description = new JLabel("Description:");
 		add(description);
@@ -16,10 +18,16 @@ public class DescribedPlaceDialog extends NamedPlaceDialog {
 
 	}
 
-	public String getDescriptionInput() {
+	protected String getDescriptionInput() {
 
 		return descriptionInput.getText();
 
 	}
+	
+	@Override
+	public DescribedPlace getPlace() {
+		
+		return new DescribedPlace(getCategory(), getPosition(), getNameInput(), getDescriptionInput());
 
+	}
 }

@@ -12,23 +12,25 @@ public class NewPlaceListener extends MouseAdapter {
 	private Mediator mediator;
 	private MapPanel mapPanel;
 	private String selectedType;
+	private String selectedCategory();
 
-	public NewPlaceListener(Mediator mediator, MapPanel mapPanel, String selectedType) {
+	public NewPlaceListener(Mediator mediator, MapPanel mapPanel, String selectedType, String selectedCategory()) {
 
 		this.mediator = mediator;
 		this.mapPanel = mapPanel;
 		this.selectedType = selectedType;
+		this.selectedCategory = selectedCategory;
 
 	}
 
-	private NamedPlaceDialog determineDialog() {
+	private NamedPlaceDialog determineDialog(Position position) {
 
 		switch(selectedType) {
 
 			case "Named":
-				return new NamedPlaceDialog();
+				return new NamedPlaceDialog(selectedCategory,position);
 			case "Described":
-				return new DescribedPlaceDialog();
+				return new DescribedPlaceDialog(selectedCategory, position);
 		}
 		return null;
 
@@ -53,7 +55,7 @@ public class NewPlaceListener extends MouseAdapter {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 
-		NamedPlaceDialog placeDialog = determineDialog();
+		NamedPlaceDialog placeDialog = determineDialog(new Position(e.getX(), e.getY()));
 
 		int okOrCancel = JOptionPane.showOptionDialog(mapPanel, 
 							placeDialog, 
