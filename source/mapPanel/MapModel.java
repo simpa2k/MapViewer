@@ -48,6 +48,30 @@ public class MapModel {
 		return changed;
 
 	}
+	
+	private void addPlace(Place place) {
+
+		place.addMouseListener(new ExistingPlaceListener(place));
+		
+		places.put(place.getPosition(), place);
+
+		if(place instanceof NamedPlace) {
+
+			placesByName.put(((NamedPlace)place).getName(), place);
+
+		}
+
+		view.drawPlace(place);
+
+	}
+
+	public void addNewPlace(Place place) {
+
+		addPlace(place);	
+		changed = true;
+
+	}
+
 
 	public void createPlace(String category, int xPosition, int yPosition, String name, String description) {
 
@@ -59,22 +83,16 @@ public class MapModel {
 					new Position(xPosition, yPosition), 
 					name);
 
-			placesByName.put(place.getName(), place);
-
 		} else {
 
 			place = new DescribedPlace(category, 
 						new Position(xPosition, yPosition), 
 						name,
 						description);
-
-			placesByName.put(place.getName(), place);
 			
 		}
 		
-		place.addMouseListener(new ExistingPlaceListener(place));
-		places.put(place.getPosition(), place);
-		view.drawPlace(place);
+		addPlace(place);
 	}
 
 	private void parsePlaceLine(String[] properties) {
@@ -120,12 +138,6 @@ public class MapModel {
 
 		} 
 
-	}
-
-	public void addPlace(String selectedCategory, int xPosition, int yPosition, String name, String description) {
-		
-		createPlace(selectedCategory, xPosition, yPosition, name, description);
-		changed = true;
 	}
 
 	public void savePlaces(File saveFile) {

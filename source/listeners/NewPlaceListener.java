@@ -3,6 +3,7 @@ package listeners;
 import mediator.Mediator;
 import mapPanel.MapPanel;
 import dialogs.*;
+import places.*;
 
 import java.awt.event.*;
 import javax.swing.*;
@@ -12,9 +13,9 @@ public class NewPlaceListener extends MouseAdapter {
 	private Mediator mediator;
 	private MapPanel mapPanel;
 	private String selectedType;
-	private String selectedCategory();
+	private String selectedCategory;
 
-	public NewPlaceListener(Mediator mediator, MapPanel mapPanel, String selectedType, String selectedCategory()) {
+	public NewPlaceListener(Mediator mediator, MapPanel mapPanel, String selectedType, String selectedCategory) {
 
 		this.mediator = mediator;
 		this.mapPanel = mapPanel;
@@ -36,22 +37,6 @@ public class NewPlaceListener extends MouseAdapter {
 
 	}
 
-	private void getInput(MouseEvent e, NamedPlaceDialog placeDialog) {
-
-		switch(selectedType) {
-
-			case "Named":
-				mediator.createPlace(e.getX(), e.getY(), placeDialog.getNameInput(), null);
-				break;
-			case "Described":
-				DescribedPlaceDialog describedPlaceDialog = (DescribedPlaceDialog) placeDialog;
-				mediator.createPlace(e.getX(), e.getY(), describedPlaceDialog.getNameInput(), describedPlaceDialog.getDescriptionInput());
-				break;
-
-		}
-
-	}
-
 	@Override
 	public void mouseClicked(MouseEvent e) {
 
@@ -66,7 +51,8 @@ public class NewPlaceListener extends MouseAdapter {
 
 		if(okOrCancel == JOptionPane.OK_OPTION) {
 
-			getInput(e, placeDialog);
+//			getInput(e, placeDialog);
+			mediator.createPlace(placeDialog.getPlace());
 
 		} else {
 				

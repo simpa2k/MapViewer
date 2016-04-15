@@ -1,3 +1,8 @@
-*Try and see if the accessdeniedexceptions and nosuchfileexceptions that gets thrown from the fileshooser can be caught 
+*Try and see if the accessdeniedexceptions and nosuchfileexceptions that gets thrown from the filechooser can be caught 
 
 *Use focus events to keep track of a place's marked status
+
+*Fix code repetition in MapModel.addPlace() and createPlace()
+
+*Use Jozef's version of creating a BufferedReader, also consider moving the formatting of places to be saved
+ to the savePlaces() method instead of keeping it in the Place's toString()-method. 

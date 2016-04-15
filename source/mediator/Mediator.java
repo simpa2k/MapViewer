@@ -95,12 +95,10 @@ public class Mediator {
 
 	}
 
-	public void createPlace(int xPosition, int yPosition, String name, String description) {
+	public void createPlace(Place place) {
 
-//			String type = description == null ? "Named" : "Described";
-		String selectedCategory = view.getSelectedCategory();
 
-		mapModel.addPlace(selectedCategory, xPosition, yPosition, name, description);
+		mapModel.addNewPlace(place);
 		
 		removeMapListener();
 

@@ -1,5 +1,6 @@
 package dialogs;
 
+import places.*;
 import javax.swing.*;
 
 public class DescribedPlaceDialog extends NamedPlaceDialog {
