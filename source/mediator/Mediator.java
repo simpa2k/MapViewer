@@ -4,6 +4,7 @@ import mapPanel.*;
 import mvc.View;
 import places.*;
 import listeners.*;
+import jPanels.*;
 
 import javax.swing.*;
 import javax.swing.event.*;
@@ -27,7 +28,6 @@ public class Mediator {
 
 		this.mapModel = mapModel;
 		this.view = view;
-
 	}
  	
 	private void setCrosshairCursor(JPanel panel) {
@@ -46,12 +46,14 @@ public class Mediator {
 	public void addMapListener(String selectedType) {
 
 		MapPanel mapPanel = view.getMapPanel();
+		ControlPanel controlPanel = view.getControlPanel();
+		Categories categories = view.getCategories();
 
 		if( (mapPanel != null) && (mapPanel.getMouseListeners().length == 0) ) {
 
 			setCrosshairCursor(mapPanel);
 			
-			newPlaceListener = new NewPlaceListener(this, mapPanel, selectedType, view.getSelectedCategory());
+			newPlaceListener = new NewPlaceListener(this, mapPanel, controlPanel, categories);
 			mapPanel.addMouseListener(newPlaceListener);
 
 		}

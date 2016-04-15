@@ -4,6 +4,7 @@ import mediator.Mediator;
 import mapPanel.MapPanel;
 import dialogs.*;
 import places.*;
+import jPanels.*;
 
 import java.awt.event.*;
 import javax.swing.*;
@@ -12,26 +13,26 @@ public class NewPlaceListener extends MouseAdapter {
 
 	private Mediator mediator;
 	private MapPanel mapPanel;
-	private String selectedType;
-	private String selectedCategory;
+	private ControlPanel controlPanel;
+	private Categories categories;
 
-	public NewPlaceListener(Mediator mediator, MapPanel mapPanel, String selectedType, String selectedCategory) {
+	public NewPlaceListener(Mediator mediator, MapPanel mapPanel, ControlPanel controlPanel, Categories categories) {
 
 		this.mediator = mediator;
 		this.mapPanel = mapPanel;
-		this.selectedType = selectedType;
-		this.selectedCategory = selectedCategory;
-
+		this.controlPanel = controlPanel;
+		this.categories = categories;
 	}
 
-	private NamedPlaceDialog determineDialog(Position position) {
+	private NamedPlaceDialog determineDialog(String selectedType, Position position) {
 
 		switch(selectedType) {
 
 			case "Named":
-				return new NamedPlaceDialog(selectedCategory,position);
+				return new NamedPlaceDialog(categories.getSelectedCategory(),position);
 			case "Described":
-				return new DescribedPlaceDialog(selectedCategory, position);
+				return new DescribedPlaceDialog(categories.getSelectedCategory(), position);
+
 		}
 		return null;
 
@@ -39,8 +40,9 @@ public class NewPlaceListener extends MouseAdapter {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-
-		NamedPlaceDialog placeDialog = determineDialog(new Position(e.getX(), e.getY()));
+		
+		String selectedType = controlPanel.getSelectedType();
+		NamedPlaceDialog placeDialog = determineDialog(selectedType, new Position(e.getX(), e.getY()));
 
 		int okOrCancel = JOptionPane.showOptionDialog(mapPanel, 
 							placeDialog, 
@@ -51,7 +53,6 @@ public class NewPlaceListener extends MouseAdapter {
 
 		if(okOrCancel == JOptionPane.OK_OPTION) {
 
-//			getInput(e, placeDialog);
 			mediator.createPlace(placeDialog.getPlace());
 
 		} else {

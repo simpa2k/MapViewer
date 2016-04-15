@@ -115,6 +115,18 @@ public class View extends JFrame {
 		mapPanel.repaint();
 
 	}
+	
+	public ControlPanel getControlPanel() {
+		
+		return controlPanel;
+
+	}
+
+	public Categories getCategories() {
+
+		return categories;
+
+	}
 
 	public String getSelectedCategory() {
 

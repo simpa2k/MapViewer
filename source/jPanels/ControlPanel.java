@@ -11,7 +11,8 @@ public class ControlPanel extends JPanel {
 
 	Mediator mediator;
 	View parentFrame;
-
+	
+	JComboBox<String> namedOrDescribed;
 	JTextField searchField;
 
 	public ControlPanel(View parentFrame, Mediator mediator) {
@@ -27,7 +28,7 @@ public class ControlPanel extends JPanel {
 		optionBar.add(createNew);
 
 		String[] typesOfPlaces = {"Named", "Described"};
-		JComboBox<String> namedOrDescribed = new JComboBox<>(typesOfPlaces);
+		namedOrDescribed = new JComboBox<>(typesOfPlaces);
 		namedOrDescribed.addActionListener(event -> mediator.addMapListener(typesOfPlaces[namedOrDescribed.getSelectedIndex()]));
 		optionBar.add(namedOrDescribed);
 
@@ -52,6 +53,11 @@ public class ControlPanel extends JPanel {
 
 		add(optionBar);
 
+	}
+
+	public String getSelectedType() {
+		
+		return (String) namedOrDescribed.getSelectedItem();
 	}
 	
 }
