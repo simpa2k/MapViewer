@@ -2,5 +2,3 @@
 
 *Use focus events to keep track of a place's marked status
 
-*Use Jozef's version of creating a BufferedReader, also consider moving the formatting of places to be saved
- to the savePlaces() method instead of keeping it in the Place's toString()-method. 
