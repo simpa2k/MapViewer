@@ -29,7 +29,7 @@ public class NewPlaceListener extends MouseAdapter {
 		switch(selectedType) {
 
 			case "Named":
-				return new NamedPlaceDialog(categories.getSelectedCategory(),position);
+				return new NamedPlaceDialog(categories.getSelectedCategory(), position);
 			case "Described":
 				return new DescribedPlaceDialog(categories.getSelectedCategory(), position);
 
