@@ -9,6 +9,8 @@ import java.nio.file.*;
 import java.nio.charset.Charset;
 import java.util.*;
 
+import javax.swing.JOptionPane;
+
 public class MapModel {
 
 	private MapPanel view;
@@ -29,7 +31,7 @@ public class MapModel {
 
 	}
 
-	public void setMapFile(File mapFile) {
+	public void setMapFile(File mapFile) throws IOException {
 
 		this.mapFile = mapFile;
 
@@ -116,51 +118,41 @@ public class MapModel {
 
 	}
 
-	public void loadPlaces(File placesFile) {
+	public void loadPlaces(File placesFile) throws IOException {
 
 	        this.placesFile = placesFile;
 		
-		try(BufferedReader reader = Files.newBufferedReader(placesFile.toPath(), charset)) {
+		BufferedReader reader = Files.newBufferedReader(placesFile.toPath(), charset);
 			
-			String line;
+		String line;
 
-			while( (line = reader.readLine()) != null ) {
+		while( (line = reader.readLine()) != null ) {
 
-				String[] properties = line.split(",");
+			String[] properties = line.split(",");
 				
-				parsePlaceLine(properties);
+			parsePlaceLine(properties);
 					
-			}
+		}
 
-		} catch(IOException e) {
-
-			System.out.println("Places file not found.");
-
-		} 
 
 	}
 
-	public void savePlaces(File saveFile) {
-		
+	public void savePlaces(File saveFile) throws IOException {
+
 		if(places != null) {
-			
+
+			PrintWriter writer = new PrintWriter(new FileWriter(saveFile));
+
 			places.forEach( (position, place) -> {		
-				
-				try(BufferedWriter writer = Files.newBufferedWriter(saveFile.toPath(), charset, StandardOpenOption.APPEND)) {
+						
+				writer.println(place.toString());
 
-					writer.write(place.toString(), 0, place.toString().length());
-					writer.newLine();
-
-				} catch(IOException e) {
-					
-					System.out.println(e);
-
-				}	
 			});
 
 			changed = false;
 
 		}
+
 	}
 
 	public File getPlacesFile() {

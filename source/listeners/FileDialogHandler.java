@@ -3,7 +3,7 @@ package listeners;
 import mapPanel.MapModel;
 import mvc.View;
 
-import java.io.File;
+import java.io.*;
 import javax.swing.*;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.*;
@@ -29,7 +29,7 @@ public class FileDialogHandler {
 	private File getFile(int okOrCancel) {
 	
 		if(okOrCancel == JFileChooser.APPROVE_OPTION) {
-
+			
 			return fileChooser.getSelectedFile();
 
 		}
@@ -50,15 +50,26 @@ public class FileDialogHandler {
 		fileChooser.setFileFilter(imageFilter);
 		File mapFile = openFile();
 
-		if(mapFile != null) {
-			
+		if(mapFile == null) {
+
+			return;
+
+		}
+
+		try {	
+
 			mapModel.setMapFile(mapFile);
 
 			window.pack();
 			window.validate();
 			window.makeMenuItemsEnabled();
 
-		}
+		} catch(IOException e) {
+
+			JOptionPane.showMessageDialog(window, "Error: " + e.getMessage());
+
+		} 
+
 
 	}
 	
@@ -67,11 +78,21 @@ public class FileDialogHandler {
 		fileChooser.setFileFilter(placesFilter);
 		File placesFile = openFile();
 
-		if(placesFile != null) {
+		if(placesFile == null) {
+
+			return;
+
+		}
+
+		try {
 
 			mapModel.loadPlaces(placesFile);
 
-		}
+		} catch(IOException e) {
+
+			JOptionPane.showMessageDialog(window, "Error: " + e.getMessage());
+
+		} 
 
 	}
 
@@ -82,12 +103,19 @@ public class FileDialogHandler {
 		int okOrCancel = fileChooser.showSaveDialog(window);		
 		File saveFile = getFile(okOrCancel);
 
-		if(saveFile != null) {
+		try {
 
 			mapModel.savePlaces(saveFile);
-//			mapModel.setChanged(false);
 
-		
+		} catch(FileNotFoundException e) {
+
+			JOptionPane.showMessageDialog(window, "Could not open file.");
+
+		} catch(IOException e) {
+			
+			JOptionPane.showMessageDialog(window, "Error: " + e.getMessage());
+			
+
 		}
 
 	}

@@ -23,17 +23,9 @@ public class MapPanel extends JPanel {
 
 	}
 
-	public void setMap(File mapFile) {
+	public void setMap(File mapFile) throws IOException {
 
-		try {
-			
-			image = ImageIO.read(mapFile);
-
-		} catch(IOException e) {
-
-			System.out.println("Map not found.");
-
-		}
+		image = ImageIO.read(mapFile);
 
 		this.setPreferredSize(new Dimension(image.getWidth(this), image.getHeight(this)));
 		repaint();		
